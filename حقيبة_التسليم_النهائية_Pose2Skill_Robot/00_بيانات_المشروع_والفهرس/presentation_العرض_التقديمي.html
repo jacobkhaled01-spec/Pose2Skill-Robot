@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>العرض التقديمي لمشروع معالجة الصور | Pose2Skill-Robot | جامعة إب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-accent: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-surface: #1e293b;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-light: #f8fafc;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* TOP PROGRESS BAR */
+    .progress-container {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--primary-accent), var(--accent-emerald));
+      width: 7.14%;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* TOP HEADER */
+    header {
+      padding: 10px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      color: white;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .brand-title {
+      font-weight: 800;
+      font-size: 14px;
+      color: #f1f5f9;
+    }
+    .univ-tag {
+      font-size: 12px;
+      color: #94a3b8;
+      border-right: 1px solid #334155;
+      padding-right: 12px;
+      margin-right: 6px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .counter-badge {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-cyan);
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-accent);
+      color: white;
+    }
+
+    /* DECK CONTAINER */
+    .deck-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 24px 38px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-35px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      background: #FFFFFF;
+      color: var(--text-main);
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+
+    /* SLIDE HEADER */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .slide-category {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .slide-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    .slide-badge {
+      font-size: 11px;
+      font-weight: 700;
+      background: #eff6ff;
+      color: var(--primary-light);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #bfdbfe;
+    }
+
+    /* SLIDE BODY & GRIDS */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+    }
+    .card-accent {
+      border-right: 4px solid var(--primary-light);
+    }
+    .card-emerald {
+      border-right: 4px solid var(--accent-emerald);
+    }
+    .card-cyan {
+      border-right: 4px solid var(--accent-cyan);
+    }
+    .card-amber {
+      border-right: 4px solid var(--accent-amber);
+    }
+
+    .card-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-text {
+      font-size: 11.5px;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* CODE & MATH DISPLAY */
+    .math-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-family: 'Times New Roman', serif;
+      font-size: 13.5px;
+      direction: ltr;
+      text-align: center;
+      color: #0f172a;
+      font-style: italic;
+    }
+    .code-box {
+      background: #0f172a;
+      color: #38bdf8;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      direction: ltr;
+      text-align: left;
+      line-height: 1.45;
+      overflow-x: auto;
+    }
+
+    /* TABLES */
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    table.data-table th {
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+      text-align: right;
+      padding: 8px 10px;
+      border: 1px solid var(--primary);
+    }
+    table.data-table td {
+      padding: 7px 10px;
+      border: 1px solid var(--border-color);
+      color: #1e293b;
+    }
+    table.data-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* HIGHLIGHT NUMBERS */
+    .stat-number {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary-light);
+      font-family: 'Fira Code', monospace;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* COVER SLIDE SPECIAL */
+    .cover-slide {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+    }
+    .cover-univ {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .cover-title {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.4;
+      color: #ffffff;
+      margin-bottom: 10px;
+      max-width: 900px;
+    }
+    .cover-subtitle {
+      font-size: 14px;
+      color: var(--accent-cyan);
+      font-family: 'Times New Roman', serif;
+      font-style: italic;
+      direction: ltr;
+      margin-bottom: 22px;
+      max-width: 850px;
+    }
+    .cover-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 16px 24px;
+      width: 100%;
+      max-width: 750px;
+      text-align: right;
+      font-size: 12px;
+    }
+
+    /* FOOTER CONTROLS */
+    footer {
+      padding: 10px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.96);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+    .footer-help {
+      font-size: 11.5px;
+      color: #64748b;
+    }
+    .footer-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--primary-light);
+      border-color: var(--primary-accent);
+    }
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      body {
+        overflow: visible;
+        background: white;
+      }
+      .progress-container, header, footer {
+        display: none !important;
+      }
+      .deck-container {
+        display: block;
+        height: auto;
+      }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        display: flex !important;
+        height: 100vh !important;
+        page-break-after: always !important;
+        padding: 30px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP PROGRESS BAR -->
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <span class="brand-badge">Pose2Skill-Robot</span>
+      <span class="brand-title">مشروع مقرر معالجة صور (عملي)</span>
+      <span class="univ-tag">جامعة إب &bull; كلية الحاسبات</span>
+    </div>
+    <div class="header-controls">
+      <span class="counter-badge" id="slideCounter">1 / 14</span>
+      <button class="btn" onclick="toggleFullscreen()">⛶ شاشة كاملة</button>
+      <button class="btn" onclick="window.print()">🖨️ طباعة / تصدير PDF</button>
+    </div>
+  </header>
+
+  <!-- DECK CONTAINER -->
+  <div class="deck-container">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide active cover-slide">
+      <div class="cover-univ">الجمهورية اليمنية &bull; وزارة التعليم العالي &bull; جامعة إب &bull; كلية الحاسبات والعلوم التطبيقية &bull; قسم علوم الحاسوب</div>
+      <h1 class="cover-title">Pose2Skill-Robot: نظام ذكي لتعلّم ونقل المهارات البشرية إلى الروبوت باستخدام تقدير الوضعية والتفاعل مع الأجسام</h1>
+      <div class="cover-subtitle">Pose2Skill-Robot: An Intelligent System for Learning and Transferring Human Skills to Robots Using Pose Estimation and Object Interaction</div>
+      
+      <div class="cover-meta">
+        <div>
+          <div style="color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">إعداد فريق الطلاب:</div>
+          <div>1. يعقوب المهاجري</div>
+          <div>2. سليمان العربي</div>
+          <div>3. مالك جبران</div>
+        </div>
+        <div>
+          <div style="color: var(--accent-emerald); font-weight: 800; margin-bottom: 4px;">إشراف أستاذ المقرر:</div>
+          <div style="font-weight: 700; font-size: 13px;">م. مالك المصنف</div>
+          <div style="color: #94a3b8; font-size: 11px; margin-top: 6px;">المستوى الرابع &bull; العام الجامعي: 2025 - 2026 م</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: MOTIVATION -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">المقدمة وسياق المشروع</div>
+          <div class="slide-title">دوافع البحث ومشكلة فجوة التجسيد (Embodiment Gap)</div>
+        </div>
+        <span class="slide-badge">Research Problem</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card card-accent">
+            <div class="card-title">🚨 فجوة التجسيد بين الإنسان والروبوت</div>
+            <div class="card-text">
+              تختلف درجات حرية الروبوتات وطول أطرافها وقيود محركاتها عن الهيكل العظمي البشري؛ فالتقليد المباشر الخام يؤدي إلى تصادم ميكانيكي وكسر محركات الروبوت.
+            </div>
+          </div>
+          <div class="card card-cyan">
+            <div class="card-title">💸 تكلفة أنظمة التقاط الحركة (MoCap)</div>
+            <div class="card-text">
+              أنظمة تتبع الحركة الملبوسة (بذلات التتبع ومصفوفات الحساسات) باهظة الثمن ومقيدة، مما يستوجب بديلاً برمجياً يعتمد فقط على كاميرا الويب العادية (RGB-Only).
+            </div>
+          </div>
+          <div class="card card-emerald">
+            <div class="card-title">🤖 الحاجة لنقل المهارات وتخزينها (LfD)</div>
+            <div class="card-text">
+              توجيه الروبوت لحظياً (Teleoperation) غير كافٍ بذاته؛ فالهدف الحقيقي هو **تعلّم المهارة من العرض البشري** وتخزينها ليعيد الروبوت تنفيذها ذاتياً ومستقلاً.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #eff6ff; border-color: #bfdbfe; margin-top: 10px;">
+          <div class="card-title" style="color: var(--primary);">🎯 الرؤية الاستراتيجية للنظام</div>
+          <div class="card-text" style="color: #1e3a8a;">
+            بناء خط أنابيب متكامل منخفض التكلفة يربط بين معالجة الصور الرقمية في الزمن الحقيقي ومحاكاة الروبوتات البشرية عبر شبكات الرؤية الحركية وتجريد المهارات بصيغة مسارات زمنية (Trajectory JSON).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: OBJECTIVES -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الأهداف الهندسية</div>
+          <div class="slide-title">الأهداف والمخرجات العملية المنجزة</div>
+        </div>
+        <span class="slide-badge">Objectives & Deliverables</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-accent">
+            <div class="card-title">1. معالجة الفيديو في الزمن الحقيقي (Real-Time Vision)</div>
+            <div class="card-text">
+              قراءة ومعالجة تدفق الفيديو بدقة 640x480 وبسرعة 30 FPS مستقرة دون استهلاك مفرط للمعالج، وتجاوز مشاكل نظام تشغيل ويندوز عبر ترميز MJPG وواجهة DirectShow.
+            </div>
+          </div>
+          <div class="card card-cyan">
+            <div class="card-title">2. التقدير البصري للوضعية والكينماتيكا ثلاثية الأبعاد</div>
+            <div class="card-text">
+              استخراج 33 نقطة مفصلية للهيكل البشري عبر MediaPipe Pose، واشتقاق زوايا مفاصل الروبوت NAO الـ 20 عبر الضرب القياسي والإسقاط الفراغي.
+            </div>
+          </div>
+          <div class="card card-amber">
+            <div class="card-title">3. حل معضلة السقوط الفيزيائي (Supervisor Anti-Fall)</div>
+            <div class="card-text">
+              برمجة حزام توازن مشرف يثبت السرعة المتجهية للجذع لمنع انقلاب الروبوت عند رفع القدم للركل، مع ترك محركات الأرجل والأذرع تتحرك بحرية كاملة.
+            </div>
+          </div>
+          <div class="card card-emerald">
+            <div class="card-title">4. محرك تعلّم المهارات وتخزين المسارات (LfD Engine)</div>
+            <div class="card-text">
+              تسجيل الحركات البشرية في ملفات JSON وتشغيلها ذاتياً عبر مشغل الاستيفاء الخطي الزمني (Timestamp LERP) بمطابقة تامة 1:1 لسرعة الإنسان.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: ARCHITECTURE -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">معمارية النظام</div>
+          <div class="slide-title">مخطط خط أنابيب المعالجة والتراسل (Pipeline Architecture)</div>
+        </div>
+        <span class="slide-badge">System Architecture</span>
+      </div>
+      <div class="slide-body">
+        <div class="code-box">
+[كاميرا الويب (DirectShow MJPG 640x480 @ 30 FPS)]
+         ↓ (cv2.flip + BGR to RGB)
+[نموذج MediaPipe Pose] ───→ (استخراج 33 نقطة ثلاثية الأبعاد: X, Y, Z, Visibility)
+         ↓
+[محرك الحسابات الكينماتيكية] ───→ (حساب زوايا 20 مفصلاً للأطراف العلوية والسفلية)
+         ↓
+[مرشح التنعيم الأسي EMA] ───→ (alpha=0.35 في التوجيه الحي لإزالة ارتعاش الكاميرا)
+         ↓
+[محرك المهارات LfD] ───(تسجيل / تشغيل)───→ [مكتبة المهارات Trajectory JSON]
+         ↓ (حزمة JSON عبر TCP Socket Port 10006 بزمن 1.1 ms)
+[متحكم الروبوت المشرف في Webots] ───→ (حزام التوازن torso.setVelocity([0,0,0,0,0,0]))
+         ↓
+[محركات روبوت SoftBank NAO (20 محرك مفصلي فعال)]
+        </div>
+
+        <div class="grid-4" style="margin-top: 10px;">
+          <div class="card" style="text-align: center;">
+            <div class="stat-number">30</div>
+            <div class="stat-label">إطار / ثانية (FPS)</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-number">22.5</div>
+            <div class="stat-label">مللي ثانية التأخير الكلي</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-number">33</div>
+            <div class="stat-label">نقطة تتبع من MediaPipe</div>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-number">20</div>
+            <div class="stat-label">مفصل روبوتي فعال</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: COMPUTER VISION -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">طبقة معالجة الصور الرقمية</div>
+          <div class="slide-title">الرؤية الحاسوبية واستخراج الوضعية الهيكلية</div>
+        </div>
+        <span class="slide-badge">Computer Vision</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-accent">
+            <div class="card-title">📷 حل معضلة كاميرا ويندوز (MSMF vs DirectShow)</div>
+            <div class="card-text">
+              واجهة MSMF الافتراضية في ويندوز تعاني من أخطاء في التحويل اللوني وتراكم الذاكرة المؤقتة (Buffering Latency > 200ms).<br>
+              <strong>الحل المعتمد:</strong> تفعيل <code>DirectShow</code> مع ترميز <code>MJPG</code> عبر:
+              <div class="code-box" style="margin-top: 6px;">
+os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="card-title">👁️ نموذج MediaPipe Pose (33 نقطة ثلاثية الأبعاد)</div>
+            <div class="card-text">
+              شبكة عصبية التفافية عميقة (BlazePose) تعمل على مرحلتين:
+              <ol style="margin-right: 18px; margin-top: 4px;">
+                <li><strong>كاشف الوجه والجذع (Detector):</strong> تحديد مستطيل إحاطة الشخص في الإطار.</li>
+                <li><strong>مقدّر المعالم (Landmark Regressor):</strong> التنبؤ بإحداثيات 33 نقطة ثلاثية الأبعاد ($X, Y, Z$) مع ثقة الرؤية ($v \in [0, 1]$).</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-emerald">
+          <div class="card-title">🔄 المعالجة المسبقة للإطارات (Preprocessing Pipeline)</div>
+          <div class="card-text">
+            قلب الإطار أفقياً عبر <code>cv2.flip(frame, 1)</code> لتحقيق مرآة بصرية طبيعية للمستخدم، يليه التحويل من الفضاء اللوني $BGR$ إلى $RGB$، وتطبيع الإحداثيات بالنسبة لعرض وارتفاع الإطار لمنع التأثر بمسافة المستخدم عن الكاميرا.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: KINEMATICS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الأساس الرياضي</div>
+          <div class="slide-title">الكينماتيكا وحساب زوايا المفاصل ثلاثية الأبعاد</div>
+        </div>
+        <span class="slide-badge">Kinematics Math</span>
+      </div>
+      <div class="slide-body">
+        <div class="card card-accent">
+          <div class="card-title">📐 المعادلة العامة لحساب الزاوية ثلاثية الأبعاد بين ثلاثة معالم (A, B, C)</div>
+          <div class="math-box">
+            \vec{u} = \mathbf{p}_A - \mathbf{p}_B, \quad \vec{v} = \mathbf{p}_C - \mathbf{p}_B, \quad 
+            \theta = \arccos\left( \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\| + 10^{-6}} \right) \times \frac{180}{\pi}
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">1. مفاصل الرأس (Head Yaw & Pitch)</div>
+            <div class="card-text">
+              يتم استخراج منتصف المسافة بين الكتفين كمرجع للصدر، وحساب انحراف الأنف:
+              <div class="code-box" style="margin-top: 4px;">
+head_yaw = clip((nose.x - shoulder_mid_x) * 2.8, -1.8, 1.8)
+head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">2. مفاصل الأذرع (Shoulders & Elbows)</div>
+            <div class="card-text">
+              &bull; <strong>الكتف للأمام (Pitch):</strong> $\arcsin(u_y / L)$ مع تقييد المدى.<br>
+              &bull; <strong>الكتف جانبياً (Roll):</strong> زاوية إبعاد العضد (Abduction).<br>
+              &bull; <strong>ثني الكوع (Roll):</strong> $180^\circ - \text{calculate\_angle\_3d}(\text{Sh, El, Wr})$.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: LEGS KINEMATICS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الكينماتيكا المتقدمة</div>
+          <div class="slide-title">كينماتيكا الأطراف السفلية، الركل، والقرفصاء</div>
+        </div>
+        <span class="slide-badge">Legs & Squats</span>
+      </div>
+      <div class="slide-body">
+        <div class="card card-cyan">
+          <div class="card-title">🦶 خوارزمية كشف ركل ورفع القدمين تلقائياً</div>
+          <div class="card-text">
+            حساب فرق الارتفاع الرأسي بين الكاحلين: $\Delta_{\text{ank}} = \text{L\_ank}_y - \text{R\_ank}_y$
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card card-emerald">
+            <div class="card-title">🥋 ركل بالقدم اليمنى</div>
+            <div class="card-text">
+              عندما $\Delta_{\text{ank}} > 0.06$:<br>
+              &bull; <code>RKneePitch = bend * 1.1</code><br>
+              &bull; <code>RHipPitch = -0.75 * RKnee</code><br>
+              &bull; القدم اليسرى مثبتة كقاعدة ارتكاز على الأرض.
+            </div>
+          </div>
+
+          <div class="card card-accent">
+            <div class="card-title">🥋 ركل بالقدم اليسرى</div>
+            <div class="card-text">
+              عندما $\Delta_{\text{ank}} < -0.06$:<br>
+              &bull; <code>LKneePitch = bend * 1.1</code><br>
+              &bull; <code>LHipPitch = -0.75 * LKnee</code><br>
+              &bull; القدم اليمنى مثبتة كقاعدة ارتكاز على الأرض.
+            </div>
+          </div>
+
+          <div class="card card-amber">
+            <div class="card-title">🏋️ وضعية القرفصاء المتزنة</div>
+            <div class="card-text">
+              عند ثني الركبتين معاً:<br>
+              &bull; <code>KneePitch = bend * 0.95</code><br>
+              &bull; <code>HipPitch = -0.52 * Knee</code><br>
+              &bull; <code>AnklePitch = -0.48 * Knee</code> لموازنة باطن القدم مع الأرض.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: EMA FILTER -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">معالجة الإشارات والتحكم</div>
+          <div class="slide-title">مرشح التنعيم الأسي الرقمي (EMA Filter)</div>
+        </div>
+        <span class="slide-badge">Signal Smoothing</span>
+      </div>
+      <div class="slide-body">
+        <div class="card card-accent">
+          <div class="card-title">📈 الصياغة الرياضية للمرشح</div>
+          <div class="math-box">
+            \hat{q}(t) = \alpha \cdot q(t) + (1 - \alpha) \cdot \hat{q}(t - \Delta t)
+          </div>
+          <div class="card-text" style="text-align: center; margin-top: 4px;">
+            حيث $q(t)$ هي زاوية المفصل الخام من الكاميرا، و $\hat{q}(t)$ هي القيمة المنعمة المرسلة لمحركات الروبوت.
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card card-cyan">
+            <div class="card-title">1. وضع التوجيه الحي (Live Teleoperation)</div>
+            <div class="card-text">
+              &bull; <strong>المعامل المعتمد:</strong> $\alpha = 0.35$<br>
+              &bull; <strong>الوظيفة:</strong> مرشح تمرير منخفض (Low-Pass Filter) يخمد ارتعاش اليد وضجيج الحساس في الإضاءة المتغيرة، مع إبقاء التأخير الزمني دون 35 مللي ثانية لضمان استجابة المحركات الحية.
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">2. وضع تشغيل المهارات (Skill Replay)</div>
+            <div class="card-text">
+              &bull; <strong>المعامل المعتمد:</strong> $\alpha = 1.0$<br>
+              &bull; <strong>الوظيفة:</strong> إلغاء كبح التنعيم أثناء إعادة تشغيل المهارات المسجلة؛ لأن المسار مسجل ومصفى مسبقاً، مما يمنح الروبوت عزم الوصول الكامل لأقصى المدى الحركي المسجل بنسبة 100%.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: LFD ENGINE -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الذكاء الاصطناعي وتعلّم المهارات</div>
+          <div class="slide-title">محرك LfD ومشغل الاستيفاء الخطي الزمني (Timestamp LERP)</div>
+        </div>
+        <span class="slide-badge">LfD Engine</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-accent">
+            <div class="card-title">💾 بنية ملفات المهارات المسجلة (JSON Schema)</div>
+            <div class="card-text">
+              يتم حفظ كل مهارة كمتتالية زمنية من الزوايا مع طابع زمني حقيقي $t$ بالثواني:
+              <div class="code-box" style="margin-top: 4px;">
+{
+  "name": "skill_martial_arts_kick.json",
+  "duration_seconds": 3.42,
+  "trajectory": [
+    {"time": 0.00, "joints": {"r_knee_pitch": 0.0, ...}},
+    {"time": 0.033, "joints": {"r_knee_pitch": 0.85, ...}}
+  ]
+}
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">⏱️ مشغل الاستيفاء الخطي الزمني (Timestamp LERP)</div>
+            <div class="card-text">
+              لحساب زوايا المفاصل عند الزمن المنقضي الفعلي $\tau$:
+              <div class="math-box" style="margin: 6px 0;">
+                \beta = \frac{\tau - t_k}{t_{k+1} - t_k}, \quad q(\tau) = q(t_k) + \beta \cdot (q(t_{k+1}) - q(t_k))
+              </div>
+              &bull; <strong>الفائدة الهندسية:</strong> فصل سرعة تشغيل المهارة عن تفاوت سرعة المعالج، وتحقيق مطابقة زمنية بنسبة <strong>1:1</strong> لسرعة حركة الإنسان الأصلية.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: SUPERVISOR HARNESS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">حل المعضلات الفيزيائية</div>
+          <div class="slide-title">حزام التوازن المشرف (Supervisor Anti-Fall Virtual Harness)</div>
+        </div>
+        <span class="slide-badge">Supervisor Harness</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-amber">
+            <div class="card-title">⚠️ معضلة السقوط الفيزيائي للروبوت</div>
+            <div class="card-text">
+              في المحاكاة الواقعية، يؤدي رفع قدم واحدة أو الانحناء السريع إلى خروج مركز الثقل (Center of Mass) عن قاعدة الارتكاز الضيقة لقدم NAO، مما يولّد عزم انقلاب فيزيائي يطرح الروبوت أرضاً فوراً، ومحاولات `resetPhysics()` التقليدية تجمد المحركات تماماً.
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">🛡️ الحل الهندسي المبتكر (Active Virtual Harness)</div>
+            <div class="card-text">
+              ترقية متحكم Webots ليعمل بصلاحية <strong>المشرف (Supervisor)</strong> وتثبيت السرعة المتجهية الخطية والدورانية للجذع برمجياً عند كل خطوة محاكاة:
+              <div class="code-box" style="margin-top: 4px;">
+self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+              </div>
+              يمتص قوى الانقلاب الخارجي دون المساس بعزم المحركات، فتتحرك الأرجل بحرية كاملة مع استقرار تام.
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-cyan">
+          <div class="card-title">🔄 آلية النهوض والاستعادة الذاتية التلقائية (Auto-Recovery)</div>
+          <div class="card-text">
+            إذا انخفض الجذع دون $22\text{ cm}$ أو تجاوزت زاوية الميلان $30^\circ$ ($0.5\text{ rad}$)، يقوم النظام تلقائياً وبشكل فوري بإعادة الروبوت لوضعية الوقوف الافتراضية ($Z=0.334\text{ m}$) دون توقف البرنامج.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: GUI & SKILLS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الواجهة التفاعلية</div>
+          <div class="slide-title">الواجهة الرسومية التفاعلية ومكتبة المهارات الجاهزة</div>
+        </div>
+        <span class="slide-badge">Interactive GUI</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-accent">
+            <div class="card-title">🖱️ أزرار التحكم بالماوس على شاشة الفيديو</div>
+            <div class="card-text">
+              شريط أدوات مدمج يدعم النقر بالماوس وتغيير اللون عند التمرير:
+              <ul style="margin-right: 18px; margin-top: 6px;">
+                <li><code>[ ● TEACH ]</code>: بدء / إيقاف تسجيل المهارة وحفظها في JSON.</li>
+                <li><code>[ ▶ REPLAY ]</code>: إعادة تشغيل المهارة مع شريط تقدم نسبي (%).</li>
+                <li><code>[ < ]</code> و <code>[ > ]</code>: التنقل بين المهارات المسجلة.</li>
+                <li><code>[ 🦿 SQUAT ]</code>: تفعيل / إلغاء القرفصاء اليدوي.</li>
+                <li><code>[ ✖ EXIT ]</code>: خروج نظيف وتحرير الكاميرا والسوكيت.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">🥋 مكتبة المهارات الحركية الجاهزة بالمشروع</div>
+            <div class="card-text">
+              تم تسجيل واختبار 4 مهارات حركية قياسية متكاملة:
+              <ol style="margin-right: 18px; margin-top: 6px;">
+                <li><strong>ركلة الفنون القتالية (Martial Arts Kick):</strong> ركل بالقدم اليمنى مع ثني الورك وموازنة الجذع.</li>
+                <li><strong>القرفصاء الرياضي (Athletic Squat):</strong> ثني متزامن للركبتين والحوض والكواحل.</li>
+                <li><strong>تحية النصر (Double Arm Salute):</strong> رفع متناسق للذراعين للأعلى.</li>
+                <li><strong>التلويح والترحيب (Wave Greeting):</strong> رفع الذراع والتلويح بالكف.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: EXPERIMENTAL RESULTS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">التجارب والتحقق</div>
+          <div class="slide-title">النتائج التجريبية وقياسات الأداء وزمن المعالجة</div>
+        </div>
+        <span class="slide-badge">Benchmarks</span>
+      </div>
+      <div class="slide-body">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>المرحلة البرمجية في خط الأنابيب</th>
+              <th>متوسط زمن التنفيذ (مللي ثانية)</th>
+              <th>النسبة المئوية من الدورة</th>
+              <th>معدل التردد المحقق</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>التقاط الإطار من الكاميرا (OpenCV DirectShow MJPG)</td>
+              <td>4.2 &plusmn; 0.8 ms</td>
+              <td>18.6%</td>
+              <td>30 FPS</td>
+            </tr>
+            <tr>
+              <td>استخراج 33 نقطة مفصلية عبر MediaPipe Pose</td>
+              <td>16.5 &plusmn; 1.4 ms</td>
+              <td>73.3%</td>
+              <td>30 FPS</td>
+            </tr>
+            <tr>
+              <td>الحسابات الكينماتيكية للزوايا الـ 20</td>
+              <td>0.6 &plusmn; 0.1 ms</td>
+              <td>2.6%</td>
+              <td>30 FPS</td>
+            </tr>
+            <tr>
+              <td>تصفية التنعيم الأسي (EMA Filter)</td>
+              <td>0.1 &plusmn; 0.05 ms</td>
+              <td>0.4%</td>
+              <td>30 FPS</td>
+            </tr>
+            <tr>
+              <td>الإرسال عبر مقبس TCP المحلي (IPC Socket)</td>
+              <td>1.1 &plusmn; 0.3 ms</td>
+              <td>4.8%</td>
+              <td>30 FPS</td>
+            </tr>
+            <tr style="font-weight: 800; background: #e0f2fe; color: var(--primary);">
+              <td>التأخير الإجمالي بين الكاميرا وحركة الروبوت (End-to-End)</td>
+              <td>22.5 ms</td>
+              <td>100%</td>
+              <td>30 FPS مستقر تماماً</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="card card-emerald" style="margin-top: 10px;">
+          <div class="card-title">💡 دلالة النتائج الرقمية</div>
+          <div class="card-text">
+            التأخير الكلي (22.5 مللي ثانية) أقل بكثير من زمن الإطار الواحد (33.3 مللي ثانية)، مما يثبت أن النظام يعمل في الزمن الحقيقي الصارم (Hard Real-Time Perception) دون أي تراكم للإطارات أو تباطؤ في المحاكاة.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 13: LIMITATIONS & FUTURE WORK -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الأمانة العلمية والتطوير</div>
+          <div class="slide-title">القيود الفنية الواقعية وآفاق التطوير المستقبلي</div>
+        </div>
+        <span class="slide-badge">Limitations & Future</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card card-amber">
+            <div class="card-title">⚠️ القيود الفنية الواقعية (Technical Limitations)</div>
+            <div class="card-text">
+              <ul style="margin-right: 18px; line-height: 1.7;">
+                <li><strong>حدود تتبع الأصابع:</strong> يقتصر النظام على نموذج MediaPipe Pose (33 نقطة) لتتبع الهيكل العظمي العام، ولا يتضمن تتبعاً لعقل الأصابع الفردية لتفادي هبوط معدل الإطارات.</li>
+                <li><strong>إمساك الأجسام في المحاكاة:</strong> مفاصل كف NAO في Webots سلاميات سلبية ذات احتكاك ضعيف، والتقاط الأجسام الصلبة يتطلب خوارزميات تخطيط قبضة متقدمة (Grasp Planning).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">🚀 آفاق التطوير المستقبلي (Future Horizons)</div>
+            <div class="card-text">
+              <ul style="margin-right: 18px; line-height: 1.7;">
+                <li><strong>سياسات التوليد الحركي (Diffusion Policy):</strong> تدريب نماذج تعلم عميق توليدية لتعميم المهارات المسجلة والتكيف مع عوائق البيئة.</li>
+                <li><strong>حساسات رد الفعل اللمسي (Tactile Sensors):</strong> إضافة حساسات ضغط على أصابع الروبوت لإتقان مهام الالتقاط الدقيقة.</li>
+                <li><strong>النقل إلى روبوت حقيقي (Sim-to-Real):</strong> نقل المسارات من Webots إلى روبوت NAO الحقيقي في مختبر الجامعة.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14: CONCLUSION & QA -->
+    <div class="slide cover-slide">
+      <div class="cover-univ">خاتمة العرض والمناقشة</div>
+      <h1 class="cover-title" style="font-size: 28px;">شكراً لحسن استماعكم واهتمامكم</h1>
+      <div class="cover-subtitle" style="font-size: 15px;">Pose2Skill-Robot: An Intelligent System for Learning & Transferring Human Skills to Robots</div>
+
+      <div class="card" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15); max-width: 600px; text-align: center; margin: 15px 0;">
+        <div style="color: var(--accent-cyan); font-weight: 800; font-size: 14px; margin-bottom: 6px;">مستودع المشروع المفتوح المصدر (GitHub):</div>
+        <div style="font-family: 'Fira Code', monospace; font-size: 13px; color: #ffffff;">https://github.com/jacobkhaled01-spec/Pose2Skill-Robot</div>
+      </div>
+
+      <div style="color: #cbd5e1; font-size: 14px; margin-top: 10px;">
+        نرحب بأسئلة واستفسارات أستاذ المقرر وأعضاء لجنة المناقشة الموقرة 🎓
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER CONTROLS -->
+  <footer>
+    <div class="footer-help">
+      استخدم الأسهم <strong>→</strong> و <strong>←</strong> أو <strong>المسافة</strong> للتنقل بين الشرائح | اضغط <strong>F</strong> للشاشة الكاملة
+    </div>
+    <div class="footer-controls">
+      <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← السابق</button>
+      <button class="nav-btn" id="nextBtn" onclick="nextSlide()">التالي →</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      
+      slides[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+
+      // Update counter and progress
+      counter.innerText = (currentSlide + 1) + ' / ' + totalSlides;
+      progressBar.style.width = (((currentSlide + 1) / totalSlides) * 100) + '%';
+
+      // Update button states
+      prevBtn.disabled = (currentSlide === 0);
+      nextBtn.disabled = (currentSlide === totalSlides - 1);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        showSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        showSlide(currentSlide - 1);
+      }
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(err => {});
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        showSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        showSlide(totalSlides - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      }
+    });
+
+    // Touch swipe navigation
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.addEventListener('touchend', (e) => {
+      let touchEndX = e.changedTouches[0].screenX;
+      let diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          prevSlide(); // RTL swipe right is previous
+        } else {
+          nextSlide(); // RTL swipe left is next
+        }
+      }
+    }, false);
+
+    // Initial setup
+    showSlide(0);
+  </script>
+</body>
+</html>
