@@ -1,0 +1,14 @@
+{
+  "comment": "ROS 2 packages (rclpy, cv_bridge, *_msgs) only exist on Ubuntu 22.04 with ROS 2 Humble installed. This configuration suppresses false-positive import errors when editing on Windows.",
+  "pythonVersion": "3.10",
+  "typeCheckingMode": "off",
+  "reportMissingImports": "none",
+  "reportMissingModuleSource": "none",
+  "reportMissingTypeStubs": "none",
+  "reportUnknownVariableType": "none",
+  "reportUnknownMemberType": "none",
+  "ignore": [
+    "src/**"
+  ],
+  "extraPaths": []
+}

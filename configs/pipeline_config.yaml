@@ -1,0 +1,215 @@
+# Pipeline Configuration — Pose2Skill-Robot
+# إعدادات خط معالجة النظام الكامل
+# الإصدار: 1.0 | التاريخ: 2026-10-01
+
+pipeline:
+  version: "1.0"
+  mode: "simulation"  # "simulation" أو "real_robot"
+
+# ─── طبقة الإدراك ─────────────────────────────────────────────
+perception:
+  
+  # تقدير وضعية الجسم
+  body_pose:
+    model: "rtmpose-l"          # rtmpose-s (أسرع) أو rtmpose-l (أدق)
+    device: "cuda:0"            # "cpu" إذا لا توجد GPU
+    fps_target: 25
+    confidence_threshold: 0.3
+    input_topic: "/camera/rgb/image_raw"
+    output_topic: "/pose2skill/body_keypoints"
+    num_keypoints: 17           # COCO format
+    
+  # تقدير وضعية اليد
+  hand_pose:
+    model: "mediapipe"          # "mediapipe" أو "hamer"
+    device: "cuda:0"
+    hand_side: "both"           # "left", "right", "both"
+    min_detection_confidence: 0.7
+    min_tracking_confidence: 0.5
+    output_topic_keypoints: "/pose2skill/hand_keypoints"
+    output_topic_aperture: "/pose2skill/hand_aperture"
+    
+  # كشف وتتبع الأجسام
+  object_tracking:
+    detector: "yolo-world-l"   # "yolo-world-s" أو "yolo-world-l"
+    tracker: "bytetrack"
+    pose_estimator: "foundationpose"
+    device: "cuda:0"
+    detection_confidence: 0.4
+    tracking_confidence: 0.3
+    target_classes:
+      - "cup"
+      - "bottle"
+      - "block"
+      - "screwdriver"
+      - "box"
+      - "tool"
+    output_topic: "/pose2skill/object_poses"
+    max_objects: 5              # أقصى عدد أجسام متزامنة
+
+# ─── طبقة استخلاص المهارة ─────────────────────────────────────
+skill_extraction:
+  
+  # نموذج التجزئة الزمنية
+  segmentation:
+    model: "st_gcn"
+    checkpoint: "models/st_gcn/checkpoint_best.pth"
+    device: "cuda:0"
+    action_classes:
+      - "Approach"
+      - "Reach"
+      - "Grasp"
+      - "Lift"
+      - "Transport"
+      - "Place"
+      - "Release"
+    num_classes: 7
+    confidence_threshold: 0.7
+    temporal_window_frames: 30  # نافذة التصنيف الزمنية
+    
+  # كشف نقاط الاتصال
+  contact_detection:
+    grasp_distance_threshold_m: 0.03    # 3cm للإمساك
+    release_distance_threshold_m: 0.08  # 8cm للإفلات
+    aperture_close_threshold: 0.6       # 60% لإغلاق القبضة
+    
+  # بناء الرسم البياني للمهارة
+  skill_graph:
+    min_demonstrations: 1    # الحد الأدنى للعروض المطلوبة
+    max_demonstrations: 10   # الحد الأقصى للدمج
+    save_dir: "data/skill_graphs/"
+    save_format: "yaml"      # "yaml" أو "json"
+    
+  # موضوعات ROS 2
+  topics:
+    action_segment: "/pose2skill/action_segment"
+    skill_graph: "/pose2skill/skill_graph"
+
+# ─── طبقة التخطيط الحركي ──────────────────────────────────────
+motion_planning:
+  
+  # الروبوت الافتراضي
+  default_robot: "franka_panda"  # "franka_panda" أو "ur5e"
+  
+  # إعدادات Franka Panda
+  franka_panda:
+    planning_group: "panda_arm"
+    gripper_group: "panda_hand"
+    end_effector_link: "panda_hand_tcp"
+    base_frame: "panda_link0"
+    planner_id: "RRTConnectkConfigDefault"
+    planning_time_s: 5.0
+    num_planning_attempts: 10
+    max_velocity_scaling: 0.8
+    max_acceleration_scaling: 0.5
+    goal_position_tolerance_m: 0.001
+    goal_orientation_tolerance_rad: 0.01
+    ik_solver: "bio_ik"
+    
+  # إعدادات UR5e
+  ur5e:
+    planning_group: "ur_manipulator"
+    gripper_group: "gripper"
+    end_effector_link: "tool0"
+    base_frame: "base_link"
+    planner_id: "RRTConnectkConfigDefault"
+    planning_time_s: 5.0
+    num_planning_attempts: 15   # أكثر لأن DoF=6 أصعب
+    max_velocity_scaling: 0.7
+    max_acceleration_scaling: 0.4
+    goal_position_tolerance_m: 0.002
+    goal_orientation_tolerance_rad: 0.02
+    ik_solver: "kdl"
+    
+  # تحسين المسار
+  trajectory_optimization:
+    method: "b_spline"           # "b_spline" أو "totg"
+    smoothing_factor: 0.1
+    num_output_points: 200
+    jerk_minimization: true
+    
+  # موضوعات ROS 2
+  topics:
+    ee_goal_pose: "/pose2skill/ee_goal_pose"
+    joint_trajectory: "/pose2skill/joint_trajectory"
+    execution_status: "/pose2skill/execution_status"
+
+# ─── طبقة المحاكاة ────────────────────────────────────────────
+simulation:
+  backend: "gazebo"              # "gazebo" أو "isaac_sim"
+  
+  gazebo:
+    world_file: "configs/worlds/tabletop.world"
+    gz_version: "harmonic"
+    physics_engine: "ode"
+    real_time_factor: 1.0
+    gravity: [0, 0, -9.81]
+    
+  # الأجسام المُختبَرة (مهام التجريب المعيارية)
+  benchmark_objects:
+    pick_place:
+      - name: "cube_red"
+        size: [0.05, 0.05, 0.05]
+        mass_kg: 0.2
+        initial_pose: [0.5, 0.0, 0.825]
+      - name: "target_tray"
+        size: [0.15, 0.15, 0.01]
+        initial_pose: [0.5, 0.3, 0.755]
+    obstacle_relocation:
+      - name: "cup"
+        radius_m: 0.04
+        height_m: 0.12
+        initial_pose: [0.5, -0.1, 0.81]
+      - name: "obstacle_bar"
+        size: [0.01, 0.3, 0.1]
+        static: true
+        pose: [0.5, 0.1, 0.805]
+        
+# ─── إعدادات التقييم ──────────────────────────────────────────
+evaluation:
+  num_trials: 20              # عدد التكرارات لكل حالة
+  log_dir: "experiments/logs/"
+  save_trajectories: true
+  save_skill_graphs: true
+  
+  tasks:
+    - "pick_place"
+    - "obstacle_relocation"
+    - "orientation_transfer"
+    - "sequential_stacking"
+    
+  robots:
+    - "franka_panda"
+    - "ur5e"
+    
+  baselines:
+    - "direct_joint_mapping"
+    - "cartesian_trajectory_cloning"
+    - "pose2skill"
+    
+  success_conditions:
+    pick_place:
+      distance_to_target_m: 0.02     # 2cm
+      gripper_released: true
+    obstacle_relocation:
+      no_collision: true
+      distance_to_target_m: 0.03
+    orientation_transfer:
+      orientation_error_deg: 10.0
+    sequential_stacking:
+      num_stacked: 3
+      stability_time_s: 1.0
+
+# ─── إعدادات الـ Dashboard ────────────────────────────────────
+dashboard:
+  host: "localhost"
+  port: 3000
+  rosbridge_url: "ws://localhost:9090"
+  update_rate_hz: 10
+
+# ─── إعدادات التسجيل ──────────────────────────────────────────
+logging:
+  level: "INFO"          # DEBUG, INFO, WARN, ERROR
+  ros_log_level: "INFO"
+  save_to_file: true
+  log_file: "experiments/logs/system.log"

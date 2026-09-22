@@ -1,0 +1,27 @@
+{
+  "name": "pose2skill-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive Web Dashboard for Pose2Skill-Robot monitoring and control",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/hands": "^0.4.1675469240",
+    "@mediapipe/pose": "^0.5.1675469404",
+    "@react-three/drei": "^9.102.0",
+    "@react-three/fiber": "^8.16.0",
+    "lucide-react": "^0.378.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "recharts": "^2.12.0",
+    "roslib": "^1.4.0",
+    "three": "^0.163.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.2.0"
+  }
+}
