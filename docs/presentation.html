@@ -4,9 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>العرض التقديمي الشامل لمشروع معالجة الصور | Pose2Skill-Robot | جامعة إب</title>
+  
+  <!-- Google Fonts: Cairo & Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- MathJax 3 for rendering mathematical equations perfectly -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: () => {
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
   <style>
     :root {
       --primary: #1e3a8a;
@@ -273,31 +296,122 @@
       line-height: 1.55;
     }
 
-    /* CODE & MATH DISPLAY */
-    .math-box {
-      background: #f1f5f9;
+    /* ========================================================
+       ELEGANT MATH CARD & EQUATIONS RENDERING
+       ======================================================== */
+    .math-card {
+      background: #fdfefe;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 8px 14px;
-      font-family: 'Times New Roman', serif;
-      font-size: 13px;
-      direction: ltr;
+      border-right: 4px solid var(--primary-light);
+      border-radius: 8px;
+      padding: 12px 18px;
+      margin: 6px 0;
       text-align: center;
-      color: #0f172a;
-      font-style: italic;
+      direction: ltr;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
     }
-    .code-box {
-      background: #0f172a;
-      color: #38bdf8;
-      border-radius: 6px;
-      padding: 9px 12px;
-      font-family: 'Fira Code', monospace;
+    .math-title {
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: right;
+      direction: rtl;
+      margin-bottom: 6px;
+    }
+    .math-formula {
+      font-family: 'Times New Roman', Cambria, serif;
+      font-size: 16px;
+      color: #0f172a;
+      direction: ltr;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .math-sub {
+      font-family: 'Cairo', sans-serif;
       font-size: 10.5px;
+      color: #64748b;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* Fallback pure HTML math styles */
+    .math-var { font-style: italic; font-weight: 600; color: #1e3a8a; }
+    .math-vec { font-weight: 700; color: #0f172a; text-decoration: overline; }
+    .math-frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 4px; }
+    .math-num { border-bottom: 1.5px solid #334155; padding-bottom: 2px; }
+    .math-den { padding-top: 2px; }
+
+    /* ========================================================
+       ORGANIZED CODE WINDOW WITH MAC BUTTONS & SYNTAX HIGHLIGHT
+       ======================================================== */
+    .code-window {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin: 6px 0;
       direction: ltr;
       text-align: left;
-      line-height: 1.4;
-      overflow-x: auto;
     }
+    .code-window-header {
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .code-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .code-filename {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .code-lang {
+      font-family: 'Fira Code', monospace;
+      font-size: 9.5px;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .code-window-body {
+      padding: 10px 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 10.5px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* Syntax Highlighting Tokens */
+    .kwd { color: #f43f5e; font-weight: 700; }  /* keywords */
+    .func { color: #60a5fa; font-weight: 600; } /* function calls */
+    .str { color: #34d399; }                   /* strings */
+    .num { color: #fbbf24; }                   /* numbers */
+    .com { color: #64748b; font-style: italic; } /* comments */
+    .var { color: #f8fafc; }                   /* variables */
+    .prop { color: #c084fc; }                  /* object properties */
+    .op { color: #38bdf8; }                    /* operators */
 
     /* TABLES */
     table.data-table {
@@ -631,10 +745,15 @@
           </div>
         </div>
 
-        <div class="code-box" style="margin-top: 6px;">
-[Webcam Feed] ──(DirectShow MJPG)──→ [MediaPipe Pose: 33 Landmarks] ──→ [Kinematics & EMA Filter]
+        <div class="code-window">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+            <span class="code-filename">System Pipeline Flowchart &bull; IPC Socket 10006</span>
+            <span class="code-lang">Dataflow</span>
+          </div>
+          <div class="code-window-body">[Webcam Feed] ──(DirectShow MJPG)──→ [MediaPipe Pose: 33 Landmarks] ──→ [Kinematics & EMA Filter]
                                                                                      ↓
-[Webots Simulator: SoftBank NAO] ←──(TCP Socket 10006)── [LfD Engine: Trajectory JSON & LERP]
+[Webots Simulator: SoftBank NAO] ←──(TCP Socket 10006)── [LfD Engine: Trajectory JSON & LERP]</div>
         </div>
       </div>
     </div>
@@ -655,12 +774,18 @@
             <div class="card-text">
               واجهة MSMF الافتراضية في ويندوز تسبب خطأ تحويل الألوان وتراكماً للإطارات في الذاكرة المؤقتة (تأخير &gt; 200 ms).<br>
               <strong>الحل الهندسي:</strong> تعطيل التحويلات الصلبة وتفعيل واجهة <code>DirectShow</code> مع ترميز <code>MJPG</code> لخفض زمن الالتقاط إلى <strong>4.2 ms فقط</strong>:
-              <div class="code-box" style="margin-top: 4px;">
-os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+              
+              <div class="code-window" style="margin-top: 6px;">
+                <div class="code-window-header">
+                  <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <span class="code-filename">OpenCV Camera Optimization</span>
+                  <span class="code-lang">Python</span>
+                </div>
+                <div class="code-window-body"><span class="var">os</span>.<span class="prop">environ</span>[<span class="str">"OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"</span>] <span class="op">=</span> <span class="str">"0"</span>
+<span class="var">cap</span> <span class="op">=</span> <span class="var">cv2</span>.<span class="func">VideoCapture</span>(<span class="num">0</span>, <span class="var">cv2</span>.<span class="prop">CAP_DSHOW</span>)
+<span class="var">cap</span>.<span class="func">set</span>(<span class="var">cv2</span>.<span class="prop">CAP_PROP_FOURCC</span>, <span class="var">cv2</span>.<span class="prop">VideoWriter_fourcc</span>(*<span class="str">'MJPG'</span>))
+<span class="var">cap</span>.<span class="func">set</span>(<span class="var">cv2</span>.<span class="prop">CAP_PROP_FRAME_WIDTH</span>, <span class="num">640</span>)
+<span class="var">cap</span>.<span class="func">set</span>(<span class="var">cv2</span>.<span class="prop">CAP_PROP_FRAME_HEIGHT</span>, <span class="num">480</span>)</div>
               </div>
             </div>
           </div>
@@ -764,12 +889,15 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         <span class="slide-badge">Upper Body Kinematics</span>
       </div>
       <div class="slide-body">
-        <div class="card card-accent">
-          <div class="card-title">📐 الدالة الكينماتيكية العامة لحساب الزاوية ثلاثية الأبعاد بين ثلاثة معالم (A, B, C)</div>
-          <div class="math-box">
-            \vec{u} = \mathbf{p}_A - \mathbf{p}_B, \quad \vec{v} = \mathbf{p}_C - \mathbf{p}_B, \quad 
-            \theta = \arccos\left( \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\| + 10^{-6}} \right) \times \frac{180}{\pi}
+        
+        <!-- MathJax Vector Angle Formula Card -->
+        <div class="math-card">
+          <div class="math-title">📐 المعادلة الرياضية الكينماتيكية العامة للزاوية الفراغية ثلاثية الأبعاد (3D Joint Angle):</div>
+          <div class="math-formula">
+            $$\vec{u} = \mathbf{p}_A - \mathbf{p}_B, \quad \vec{v} = \mathbf{p}_C - \mathbf{p}_B$$
+            $$\theta = \arccos\left( \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\| + 10^{-6}} \right) \times \frac{180}{\pi}$$
           </div>
+          <div class="math-sub">حيث $10^{-6}$ حد رياضي لمنع القسمة على الصفر في حال تطابق النقاط.</div>
         </div>
 
         <div class="grid-2">
@@ -777,9 +905,14 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
             <div class="card-title">1. مفاصل الرأس (Head Yaw & Head Pitch)</div>
             <div class="card-text">
               حساب نقطة منتصف الصدر $M = (L_{sh} + R_{sh}) / 2$ واستخراج إزاحة الأنف:
-              <div class="code-box" style="margin-top: 4px;">
-head_yaw = clip((nose.x - M.x) * 2.8, -1.8, 1.8)
-head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header">
+                  <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <span class="code-filename">Head Yaw/Pitch Calculation</span>
+                  <span class="code-lang">Python</span>
+                </div>
+                <div class="code-window-body"><span class="var">head_yaw</span> <span class="op">=</span> <span class="var">np</span>.<span class="func">clip</span>((<span class="var">nose</span>.<span class="prop">x</span> <span class="op">-</span> <span class="var">M</span>.<span class="prop">x</span>) <span class="op">*</span> <span class="num">2.8</span>, <span class="op">-</span><span class="num">1.8</span>, <span class="num">1.8</span>)
+<span class="var">head_pitch</span> <span class="op">=</span> <span class="var">np</span>.<span class="func">clip</span>((<span class="var">nose</span>.<span class="prop">y</span> <span class="op">-</span> (<span class="var">M</span>.<span class="prop">y</span> <span class="op">-</span> <span class="num">0.16</span>)) <span class="op">*</span> <span class="num">2.5</span>, <span class="op">-</span><span class="num">0.6</span>, <span class="num">0.5</span>)</div>
               </div>
             </div>
           </div>
@@ -807,33 +940,41 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
         <span class="slide-badge">Lower Body & Kicking</span>
       </div>
       <div class="slide-body">
-        <div class="card card-cyan">
-          <div class="card-title">🦶 خوارزمية كشف ركل ورفع القدمين تلقائياً</div>
-          <div class="card-text">
-            يتم فحص فرق الارتفاع الرأسي لكاحل القدمين في نظام الإحداثيات: $\Delta_{\text{ank}} = \text{L\_ank}_y - \text{R\_ank}_y$
+        
+        <div class="math-card">
+          <div class="math-title">🦶 خوارزمية التفاضل الرأسي لكشف ركل القدمين تلقائياً:</div>
+          <div class="math-formula">
+            $$\Delta_{\text{ank}} = \text{L\_ank}_y - \text{R\_ank}_y$$
           </div>
+          <div class="math-sub">القدم المرتفعة تمتلك قيمة $Y$ أقل في نظام إحداثيات الصورة المعكوس.</div>
         </div>
 
         <div class="grid-3">
           <div class="card card-emerald">
             <div class="card-title">🥋 ركل بالقدم اليمنى</div>
             <div class="card-text">
-              عندما $\Delta_{\text{ank}} &gt; 0.06$:<br>
-              &bull; <code>RKneePitch = bend * 1.1</code><br>
-              &bull; <code>RHipPitch = -0.75 * RKnee</code><br>
-              &bull; <code>RAnklePitch = -0.15</code><br>
-              &bull; القدم اليسرى مثبتة كقاعدة ارتكاز.
+              عندما $\Delta_{\text{ank}} > 0.06$:<br>
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header"><span class="code-filename">Right Kick</span></div>
+                <div class="code-window-body"><span class="var">r_knee</span> <span class="op">=</span> <span class="func">clip</span>(<span class="var">bend</span> <span class="op">*</span> <span class="num">1.1</span>, <span class="num">0.4</span>, <span class="num">1.6</span>)
+<span class="var">r_hip</span>  <span class="op">=</span> <span class="op">-</span><span class="num">0.75</span> <span class="op">*</span> <span class="var">r_knee</span>
+<span class="var">r_ank</span>  <span class="op">=</span> <span class="op">-</span><span class="num">0.15</span></div>
+              </div>
+              القدم اليسرى قاعدة ارتكاز ثابتة.
             </div>
           </div>
 
           <div class="card card-accent">
             <div class="card-title">🥋 ركل بالقدم اليسرى</div>
             <div class="card-text">
-              عندما $\Delta_{\text{ank}} &lt; -0.06$:<br>
-              &bull; <code>LKneePitch = bend * 1.1</code><br>
-              &bull; <code>LHipPitch = -0.75 * LKnee</code><br>
-              &bull; <code>LAnklePitch = -0.15</code><br>
-              &bull; القدم اليمنى مثبتة كقاعدة ارتكاز.
+              عندما $\Delta_{\text{ank}} < -0.06$:<br>
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header"><span class="code-filename">Left Kick</span></div>
+                <div class="code-window-body"><span class="var">l_knee</span> <span class="op">=</span> <span class="func">clip</span>(<span class="var">bend</span> <span class="op">*</span> <span class="num">1.1</span>, <span class="num">0.4</span>, <span class="num">1.6</span>)
+<span class="var">l_hip</span>  <span class="op">=</span> <span class="op">-</span><span class="num">0.75</span> <span class="op">*</span> <span class="var">l_knee</span>
+<span class="var">l_ank</span>  <span class="op">=</span> <span class="op">-</span><span class="num">0.15</span></div>
+              </div>
+              القدم اليمنى قاعدة ارتكاز ثابتة.
             </div>
           </div>
 
@@ -841,9 +982,13 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
             <div class="card-title">🏋️ وضعية القرفصاء المتزنة</div>
             <div class="card-text">
               عند ثني الركبتين معاً:<br>
-              &bull; <code>KneePitch = bend * 0.95</code><br>
-              &bull; <code>HipPitch = -0.52 * Knee</code> (انحناء الحوض)<br>
-              &bull; <code>AnklePitch = -0.48 * Knee</code> (موازنة باطن القدم مع الأرض لمنع الانقلاب).
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header"><span class="code-filename">Balanced Squat</span></div>
+                <div class="code-window-body"><span class="var">knee_p</span>  <span class="op">=</span> <span class="func">clip</span>(<span class="var">bend</span> <span class="op">*</span> <span class="num">0.95</span>, <span class="num">0.0</span>, <span class="num">1.3</span>)
+<span class="var">hip_p</span>   <span class="op">=</span> <span class="op">-</span><span class="num">0.52</span> <span class="op">*</span> <span class="var">knee_p</span>
+<span class="var">ankle_p</span> <span class="op">=</span> <span class="op">-</span><span class="num">0.48</span> <span class="op">*</span> <span class="var">knee_p</span></div>
+              </div>
+              موازنة باطن القدم مع سطح الأرض.
             </div>
           </div>
         </div>
@@ -854,20 +999,19 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">معالجة الإشارات الرقمية</div>
+          <div class="slide-category">معالجة الإشارات الرقمية والتحكم</div>
           <div class="slide-title">مرشح التنعيم الأسي الرقمي (Exponential Moving Average)</div>
         </div>
         <span class="slide-badge">Signal Smoothing</span>
       </div>
       <div class="slide-body">
-        <div class="card card-accent">
-          <div class="card-title">📈 الصياغة الرياضية للمرشح</div>
-          <div class="math-box">
-            \hat{q}(t) = \alpha \cdot q(t) + (1 - \alpha) \cdot \hat{q}(t - \Delta t)
+        
+        <div class="math-card">
+          <div class="math-title">📈 الصياغة الرياضية لمعادلة مرشح التنعيم الأسي (EMA):</div>
+          <div class="math-formula">
+            $$\hat{q}(t) = \alpha \cdot q(t) + (1 - \alpha) \cdot \hat{q}(t - \Delta t)$$
           </div>
-          <div class="card-text" style="text-align: center; margin-top: 4px;">
-            حيث $q(t)$ هي الزاوية الخام المستخرجة من الكاميرا، و $\hat{q}(t)$ هي القيمة المصفاة المرسلة لمحركات الروبوت.
-          </div>
+          <div class="math-sub">حيث $q(t)$ هي زاوية المفصل الخام من الكاميرا، و $\hat{q}(t)$ هي القيمة المصفاة المرسلة لمحركات الروبوت.</div>
         </div>
 
         <div class="grid-2">
@@ -887,6 +1031,25 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
             </div>
           </div>
         </div>
+
+        <div class="code-window">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+            <span class="code-filename">class EMAFilter &bull; scripts/vision_to_nao_teleop.py</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <div class="code-window-body"><span class="kwd">class</span> <span class="func">EMAFilter</span>:
+    <span class="kwd">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">alpha</span>: <span class="kwd">float</span> <span class="op">=</span> <span class="num">0.35</span>):
+        <span class="var">self</span>.<span class="prop">alpha</span> <span class="op">=</span> <span class="var">alpha</span>
+        <span class="var">self</span>.<span class="prop">values</span> <span class="op">=</span> {}
+
+    <span class="kwd">def</span> <span class="func">filter</span>(<span class="var">self</span>, <span class="var">key</span>: <span class="kwd">str</span>, <span class="var">val</span>: <span class="kwd">float</span>) <span class="op">-&gt;</span> <span class="kwd">float</span>:
+        <span class="kwd">if</span> <span class="var">key</span> <span class="kwd">not in</span> <span class="var">self</span>.<span class="prop">values</span>:
+            <span class="var">self</span>.<span class="prop">values</span>[<span class="var">key</span>] <span class="op">=</span> <span class="var">val</span>
+        <span class="kwd">else</span>:
+            <span class="var">self</span>.<span class="prop">values</span>[<span class="var">key</span>] <span class="op">=</span> <span class="var">self</span>.<span class="prop">alpha</span> <span class="op">*</span> <span class="var">val</span> <span class="op">+</span> (<span class="num">1.0</span> <span class="op">-</span> <span class="var">self</span>.<span class="prop">alpha</span>) <span class="op">*</span> <span class="var">self</span>.<span class="prop">values</span>[<span class="var">key</span>]
+        <span class="kwd">return</span> <span class="var">self</span>.<span class="prop">values</span>[<span class="var">key</span>]</div>
+        </div>
       </div>
     </div>
 
@@ -900,34 +1063,46 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
         <span class="slide-badge">LfD Engine & LERP</span>
       </div>
       <div class="slide-body">
+        
+        <div class="math-card">
+          <div class="math-title">⏱️ معادلة مشغل الاستيفاء الخطي الزمني (Timestamp LERP Algorithm):</div>
+          <div class="math-formula">
+            $$\beta = \text{clip}\left( \frac{\tau - t_k}{t_{k+1} - t_k}, \; 0.0, \; 1.0 \right)$$
+            $$q(\tau) = (1 - \beta) \cdot q(t_k) + \beta \cdot q(t_{k+1})$$
+          </div>
+          <div class="math-sub">حيث $\tau = t_{\text{now}} - t_{\text{start}}$ هو الزمن المنقضي الفعلي بالثواني.</div>
+        </div>
+
         <div class="grid-2">
           <div class="card card-accent">
             <div class="card-title">💾 بنية ملف المهارة الحركية (JSON Schema)</div>
             <div class="card-text">
               تخزين مسار الحركة كمتتالية زمنية خفيفة وقابلة للنقل:
-              <div class="code-box" style="margin-top: 4px;">
-{
-  "name": "skill_martial_arts_kick.json",
-  "duration_seconds": 3.42,
-  "frame_count": 103,
-  "trajectory": [
-    {"time": 0.00, "joints": {"r_knee_pitch": 0.0, ...}},
-    {"time": 0.033, "joints": {"r_knee_pitch": 0.85, ...}}
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header">
+                  <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <span class="code-filename">skills/skill_martial_arts_kick.json</span>
+                  <span class="code-lang">JSON</span>
+                </div>
+                <div class="code-window-body">{
+  <span class="str">"name"</span>: <span class="str">"skill_martial_arts_kick.json"</span>,
+  <span class="str">"duration_seconds"</span>: <span class="num">3.42</span>,
+  <span class="str">"frame_count"</span>: <span class="num">103</span>,
+  <span class="str">"trajectory"</span>: [
+    {<span class="str">"time"</span>: <span class="num">0.00</span>, <span class="str">"joints"</span>: {<span class="str">"r_knee_pitch"</span>: <span class="num">0.0</span>, ...}},
+    {<span class="str">"time"</span>: <span class="num">0.033</span>, <span class="str">"joints"</span>: {<span class="str">"r_knee_pitch"</span>: <span class="num">0.85</span>, ...}}
   ]
-}
+}</div>
               </div>
             </div>
           </div>
 
           <div class="card card-emerald">
-            <div class="card-title">⏱️ مشغل الاستيفاء الخطي الزمني (Timestamp LERP)</div>
+            <div class="card-title">✨ مزايا استيفاء الطوابع الزمنية (Timestamp-Based)</div>
             <div class="card-text">
-              لحساب زوايا المفاصل عند الزمن المنقضي الفعلي $\tau = t_{\text{now}} - t_{\text{start}}$:
-              <div class="math-box" style="margin: 6px 0;">
-                \beta = \text{clip}\left(\frac{\tau - t_k}{t_{k+1} - t_k}, \; 0.0, \; 1.0\right), \quad 
-                q(\tau) = q(t_k) + \beta \cdot (q(t_{k+1}) - q(t_k))
-              </div>
-              &bull; <strong>الفائدة الهندسية:</strong> فصل سرعة تشغيل المهارة عن تفاوت سرعة المعالج، وتحقيق مطابقة زمنية بنسبة <strong>1:1</strong> لسرعة حركة الإنسان الأصلية.
+              &bull; <strong>استقلالية تامة عن المعالج:</strong> تشغيل المهارة بالاعتماد على عداد الإطارات يربط سرعتها بسرعة الحاسوب. أما الاستيفاء الزمني فيضمن مطابقة بنسبة <strong>1:1</strong>.<br>
+              &bull; <strong>مقاومة سقوط الإطارات (Drop Resilience):</strong> إذا تأخر إطار في الكاميرا، يستمر الروبوت بالمسار الزمني الصحيح دون أي ارتباك.<br>
+              &bull; <strong>إشارة التجاوز (is_replay Flag):</strong> تفعيل راية تلغي كبح المحركات في Webots لضمان أقصى عزم.
             </div>
           </div>
         </div>
@@ -956,8 +1131,15 @@ head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
             <div class="card-title">🛡️ الحل الهندسي المبتكر (Active Virtual Harness)</div>
             <div class="card-text">
               ترقية متحكم Webots ليعمل بصلاحية <strong>المشرف (Supervisor)</strong> وتثبيت السرعة المتجهية الخطية والدورانية للجذع برمجياً عند كل خطوة محاكاة:
-              <div class="code-box" style="margin-top: 4px;">
-self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+              
+              <div class="code-window" style="margin-top: 4px;">
+                <div class="code-window-header">
+                  <div class="code-dots"><span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span></div>
+                  <span class="code-filename">sim/webots/controllers/nao_teleop/nao_teleop.py</span>
+                  <span class="code-lang">Python</span>
+                </div>
+                <div class="code-window-body"><span class="com"># Cancel torso linear drift & tilting without resetting motor velocities!</span>
+<span class="var">self</span>.<span class="prop">self_node</span>.<span class="func">setVelocity</span>([<span class="num">0.0</span>, <span class="num">0.0</span>, <span class="num">0.0</span>, <span class="num">0.0</span>, <span class="num">0.0</span>, <span class="num">0.0</span>])</div>
               </div>
               يمتص قوى الانقلاب الخارجي دون المساس بعزم المحركات، فتتحرك الأرجل بحرية كاملة مع استقرار تام.
             </div>
@@ -967,7 +1149,14 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         <div class="card card-cyan">
           <div class="card-title">🔄 آلية النهوض والاستعادة الذاتية التلقائية (Auto-Recovery)</div>
           <div class="card-text">
-            إذا انخفض الجذع دون $22\text{ cm}$ أو مال بزاوية تتجاوز $30^\circ$ ($0.5\text{ rad}$)، يقوم النظام تلقائياً وبشكل فوري بإعادة الروبوت لوضعية الوقوف الافتراضية ($Z=0.334\text{ m}$) دون توقف البرنامج أو إعادة تشغيل المحاكاة.
+            إذا انخفض الجذع دون $22\text{ cm}$ أو مال بزاوية تتجاوز $30^\circ$ ($0.5\text{ rad}$)، يقوم النظام تلقائياً وبشكل فوري بإعادة الروبوت لوضعية الوقوف الافتراضية ($Z=0.334\text{ m}$) دون توقف البرنامج:
+            <div class="code-window" style="margin-top: 4px;">
+              <div class="code-window-header"><span class="code-filename">Auto-Recovery Logic</span></div>
+              <div class="code-window-body"><span class="kwd">if</span> <span class="var">pos</span>[<span class="num">2</span>] <span class="op">&lt;</span> <span class="num">0.22</span> <span class="kwd">or</span> <span class="func">abs</span>(<span class="var">rot</span>[<span class="num">0</span>]) <span class="op">&gt;</span> <span class="num">0.5</span> <span class="kwd">or</span> <span class="func">abs</span>(<span class="var">rot</span>[<span class="num">1</span>]) <span class="op">&gt;</span> <span class="num">0.5</span>:
+    <span class="var">self</span>.<span class="prop">trans_field</span>.<span class="func">setSFVec3f</span>([<span class="num">0.0</span>, <span class="num">0.0</span>, <span class="var">self</span>.<span class="prop">default_z</span>])
+    <span class="var">self</span>.<span class="prop">rot_field</span>.<span class="func">setSFRotation</span>(<span class="var">self</span>.<span class="prop">default_rot</span>)
+    <span class="var">self</span>.<span class="prop">self_node</span>.<span class="func">resetPhysics</span>()</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1244,6 +1433,11 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
       // Update button states
       prevBtn.disabled = (currentSlide === 0);
       nextBtn.disabled = (currentSlide === totalSlides - 1);
+
+      // Trigger MathJax typeset if needed
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([slides[currentSlide]]).catch((err) => {});
+      }
     }
 
     function nextSlide() {
