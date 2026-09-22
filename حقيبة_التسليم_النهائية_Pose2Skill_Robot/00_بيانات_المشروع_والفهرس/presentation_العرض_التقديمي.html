@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>العرض التقديمي لمشروع معالجة الصور | Pose2Skill-Robot | جامعة إب</title>
+  <title>العرض التقديمي الشامل لمشروع معالجة الصور | Pose2Skill-Robot | جامعة إب</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #1e3a8a;
+      --primary-dark: #0f172a;
       --primary-light: #2563eb;
       --primary-accent: #3b82f6;
       --accent-cyan: #06b6d4;
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
-      --bg-dark: #0f172a;
+      --accent-purple: #8b5cf6;
+      --bg-dark: #090d16;
       --bg-surface: #1e293b;
       --bg-card: #ffffff;
       --text-main: #0f172a;
@@ -46,7 +48,7 @@
     .progress-container {
       width: 100%;
       height: 5px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
       position: fixed;
       top: 0;
       left: 0;
@@ -55,25 +57,26 @@
     .progress-bar {
       height: 100%;
       background: linear-gradient(90deg, var(--accent-cyan), var(--primary-accent), var(--accent-emerald));
-      width: 7.14%;
+      width: 6.25%;
       transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
     }
 
     /* TOP HEADER */
     header {
-      padding: 10px 28px;
+      padding: 10px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: rgba(15, 23, 42, 0.96);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       z-index: 100;
     }
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .brand-badge {
       background: linear-gradient(135deg, var(--primary-light), var(--primary));
@@ -87,29 +90,44 @@
     }
     .brand-title {
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13.5px;
       color: #f1f5f9;
     }
     .univ-tag {
-      font-size: 12px;
+      font-size: 11.5px;
       color: #94a3b8;
       border-right: 1px solid #334155;
-      padding-right: 12px;
-      margin-right: 6px;
+      padding-right: 10px;
+      margin-right: 4px;
     }
 
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+    }
+    .slide-select {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+    }
+    .slide-select option {
+      background: #0f172a;
+      color: #ffffff;
     }
     .counter-badge {
       background: rgba(255, 255, 255, 0.08);
       color: var(--accent-cyan);
       font-family: 'Fira Code', monospace;
       font-weight: 700;
-      font-size: 13px;
-      padding: 4px 12px;
+      font-size: 12.5px;
+      padding: 4px 10px;
       border-radius: 20px;
       border: 1px solid rgba(6, 182, 212, 0.3);
     }
@@ -117,14 +135,14 @@
       background: rgba(255, 255, 255, 0.08);
       color: #f8fafc;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.2s;
     }
     .btn:hover {
@@ -147,13 +165,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 24px 38px;
+      padding: 22px 34px;
       display: flex;
       flex-direction: column;
       opacity: 0;
       pointer-events: none;
       transform: translateX(-35px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
+      transition: opacity 0.32s ease, transform 0.32s ease;
       background: #FFFFFF;
       color: var(--text-main);
       overflow-y: auto;
@@ -169,12 +187,12 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: 2px solid var(--border-color);
     }
     .slide-category {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
       color: var(--primary-light);
       text-transform: uppercase;
@@ -182,16 +200,16 @@
       margin-bottom: 2px;
     }
     .slide-title {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       color: var(--primary);
     }
     .slide-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
       background: #eff6ff;
       color: var(--primary-light);
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 6px;
       border: 1px solid #bfdbfe;
     }
@@ -202,54 +220,47 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      gap: 12px;
     }
     .grid-4 {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .card {
       background: #f8fafc;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.05);
     }
-    .card-accent {
-      border-right: 4px solid var(--primary-light);
-    }
-    .card-emerald {
-      border-right: 4px solid var(--accent-emerald);
-    }
-    .card-cyan {
-      border-right: 4px solid var(--accent-cyan);
-    }
-    .card-amber {
-      border-right: 4px solid var(--accent-amber);
-    }
+    .card-accent { border-right: 4px solid var(--primary-light); }
+    .card-emerald { border-right: 4px solid var(--accent-emerald); }
+    .card-cyan { border-right: 4px solid var(--accent-cyan); }
+    .card-amber { border-right: 4px solid var(--accent-amber); }
+    .card-purple { border-right: 4px solid var(--accent-purple); }
 
     .card-title {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--primary);
       display: flex;
@@ -257,9 +268,9 @@
       gap: 6px;
     }
     .card-text {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #334155;
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     /* CODE & MATH DISPLAY */
@@ -267,9 +278,9 @@
       background: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
-      padding: 10px 16px;
+      padding: 8px 14px;
       font-family: 'Times New Roman', serif;
-      font-size: 13.5px;
+      font-size: 13px;
       direction: ltr;
       text-align: center;
       color: #0f172a;
@@ -279,12 +290,12 @@
       background: #0f172a;
       color: #38bdf8;
       border-radius: 6px;
-      padding: 10px 14px;
+      padding: 9px 12px;
       font-family: 'Fira Code', monospace;
-      font-size: 11px;
+      font-size: 10.5px;
       direction: ltr;
       text-align: left;
-      line-height: 1.45;
+      line-height: 1.4;
       overflow-x: auto;
     }
 
@@ -292,18 +303,18 @@
     table.data-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 10.5px;
     }
     table.data-table th {
       background: var(--primary);
       color: white;
       font-weight: 700;
       text-align: right;
-      padding: 8px 10px;
+      padding: 7px 9px;
       border: 1px solid var(--primary);
     }
     table.data-table td {
-      padding: 7px 10px;
+      padding: 6px 9px;
       border: 1px solid var(--border-color);
       color: #1e293b;
     }
@@ -313,67 +324,67 @@
 
     /* HIGHLIGHT NUMBERS */
     .stat-number {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       color: var(--primary-light);
       font-family: 'Fira Code', monospace;
     }
     .stat-label {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
       font-weight: 600;
     }
 
     /* COVER SLIDE SPECIAL */
     .cover-slide {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #090d16 0%, #1e293b 100%);
       color: white;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 30px;
+      padding: 24px;
     }
     .cover-univ {
-      font-size: 13px;
+      font-size: 12.5px;
       color: #94a3b8;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 700;
       letter-spacing: 0.5px;
     }
     .cover-title {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       line-height: 1.4;
       color: #ffffff;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       max-width: 900px;
     }
     .cover-subtitle {
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--accent-cyan);
       font-family: 'Times New Roman', serif;
       font-style: italic;
       direction: ltr;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       max-width: 850px;
     }
     .cover-meta {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 16px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
-      padding: 16px 24px;
+      padding: 14px 20px;
       width: 100%;
-      max-width: 750px;
+      max-width: 720px;
       text-align: right;
-      font-size: 12px;
+      font-size: 11.5px;
     }
 
     /* FOOTER CONTROLS */
     footer {
-      padding: 10px 28px;
+      padding: 8px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -382,7 +393,7 @@
       z-index: 100;
     }
     .footer-help {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #64748b;
     }
     .footer-controls {
@@ -393,9 +404,9 @@
       background: rgba(255, 255, 255, 0.08);
       color: #f8fafc;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 6px 16px;
+      padding: 5px 14px;
       border-radius: 6px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
@@ -429,7 +440,7 @@
         display: flex !important;
         height: 100vh !important;
         page-break-after: always !important;
-        padding: 30px !important;
+        padding: 24px !important;
       }
     }
   </style>
@@ -446,27 +457,45 @@
     <div class="brand">
       <span class="brand-badge">Pose2Skill-Robot</span>
       <span class="brand-title">مشروع مقرر معالجة صور (عملي)</span>
-      <span class="univ-tag">جامعة إب &bull; كلية الحاسبات</span>
+      <span class="univ-tag">جامعة إب &bull; كلية الحاسبات والعلوم التطبيقية</span>
     </div>
     <div class="header-controls">
-      <span class="counter-badge" id="slideCounter">1 / 14</span>
-      <button class="btn" onclick="toggleFullscreen()">⛶ شاشة كاملة</button>
-      <button class="btn" onclick="window.print()">🖨️ طباعة / تصدير PDF</button>
+      <select class="slide-select" id="slideSelect" onchange="jumpToSlide(this.value)">
+        <option value="0">1. الغلاف الرسمي للمشروع</option>
+        <option value="1">2. دوافع البحث وفجوة التجسيد</option>
+        <option value="2">3. الأهداف والمخرجات المنجزة</option>
+        <option value="3">4. المعمارية الشاملة ومكونات النظام</option>
+        <option value="4">5. خط أنابيب معالجة الصور الرقمية</option>
+        <option value="5">6. دليل نقاط MediaPipe الـ 33</option>
+        <option value="6">7. كينماتيكا الأطراف العلوية والرأس</option>
+        <option value="7">8. كينماتيكا الأطراف السفلية والركل</option>
+        <option value="8">9. مرشح التنعيم الأسي الرقمي (EMA)</option>
+        <option value="9">10. محرك تعلّم المهارات (LfD & LERP)</option>
+        <option value="10">11. معضلة السقوط وحزام التوازن المشرف</option>
+        <option value="11">12. واجهات التحكم التفاعلية المزدوجة</option>
+        <option value="12">13. مكتبة المهارات الحركية الجاهزة</option>
+        <option value="13">14. النتائج التجريبية وقياسات الأداء</option>
+        <option value="14">15. القيود الفنية وآفاق التطوير</option>
+        <option value="15">16. الخاتمة والتسليم والمناقشة</option>
+      </select>
+      <span class="counter-badge" id="slideCounter">1 / 16</span>
+      <button class="btn" onclick="toggleFullscreen()">⛶ ملء الشاشة</button>
+      <button class="btn" onclick="window.print()">🖨️ طباعة / PDF</button>
     </div>
   </header>
 
-  <!-- DECK CONTAINER -->
+  <!-- DECK CONTAINER (16 COMPREHENSIVE SLIDES) -->
   <div class="deck-container">
 
     <!-- SLIDE 1: COVER -->
     <div class="slide active cover-slide">
-      <div class="cover-univ">الجمهورية اليمنية &bull; وزارة التعليم العالي &bull; جامعة إب &bull; كلية الحاسبات والعلوم التطبيقية &bull; قسم علوم الحاسوب</div>
+      <div class="cover-univ">الجمهورية اليمنية &bull; وزارة التعليم العالي والبحث العلمي &bull; جامعة إب &bull; كلية الحاسبات والعلوم التطبيقية &bull; قسم علوم الحاسوب وتقنية المعلومات</div>
       <h1 class="cover-title">Pose2Skill-Robot: نظام ذكي لتعلّم ونقل المهارات البشرية إلى الروبوت باستخدام تقدير الوضعية والتفاعل مع الأجسام</h1>
       <div class="cover-subtitle">Pose2Skill-Robot: An Intelligent System for Learning and Transferring Human Skills to Robots Using Pose Estimation and Object Interaction</div>
       
       <div class="cover-meta">
         <div>
-          <div style="color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">إعداد فريق الطلاب:</div>
+          <div style="color: var(--accent-cyan); font-weight: 800; margin-bottom: 4px;">فريق العمل (إعداد الطلاب):</div>
           <div>1. يعقوب المهاجري</div>
           <div>2. سليمان العربي</div>
           <div>3. مالك جبران</div>
@@ -474,46 +503,46 @@
         <div>
           <div style="color: var(--accent-emerald); font-weight: 800; margin-bottom: 4px;">إشراف أستاذ المقرر:</div>
           <div style="font-weight: 700; font-size: 13px;">م. مالك المصنف</div>
-          <div style="color: #94a3b8; font-size: 11px; margin-top: 6px;">المستوى الرابع &bull; العام الجامعي: 2025 - 2026 م</div>
+          <div style="color: #94a3b8; font-size: 11px; margin-top: 5px;">المستوى الرابع &bull; مقرر معالجة صور (عملي) &bull; 2025 - 2026 م</div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 2: MOTIVATION -->
+    <!-- SLIDE 2: MOTIVATION & PROBLEM -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">المقدمة وسياق المشروع</div>
-          <div class="slide-title">دوافع البحث ومشكلة فجوة التجسيد (Embodiment Gap)</div>
+          <div class="slide-category">سياق المشروع ودوافع البحث</div>
+          <div class="slide-title">معضلة فجوة التجسيد بين الإنسان والروبوت (Embodiment Gap)</div>
         </div>
-        <span class="slide-badge">Research Problem</span>
+        <span class="slide-badge">Problem Statement</span>
       </div>
       <div class="slide-body">
         <div class="grid-3">
           <div class="card card-accent">
-            <div class="card-title">🚨 فجوة التجسيد بين الإنسان والروبوت</div>
+            <div class="card-title">🚨 فجوة التجسيد الهيكلي والميكانيكي</div>
             <div class="card-text">
-              تختلف درجات حرية الروبوتات وطول أطرافها وقيود محركاتها عن الهيكل العظمي البشري؛ فالتقليد المباشر الخام يؤدي إلى تصادم ميكانيكي وكسر محركات الروبوت.
+              تختلف درجات حرية الروبوتات وطول أطرافها وحدود عزم محركاتها عن الهيكل العظمي البشري؛ فالتقليد الساذج الخام لزوايا الإنسان يسبب تصادم الأطراف وكسر المحركات وانهيار الاتزان الفيزيائي.
             </div>
           </div>
           <div class="card card-cyan">
-            <div class="card-title">💸 تكلفة أنظمة التقاط الحركة (MoCap)</div>
+            <div class="card-title">💸 تكلفة وتعقيد أنظمة التقاط الحركة (MoCap)</div>
             <div class="card-text">
-              أنظمة تتبع الحركة الملبوسة (بذلات التتبع ومصفوفات الحساسات) باهظة الثمن ومقيدة، مما يستوجب بديلاً برمجياً يعتمد فقط على كاميرا الويب العادية (RGB-Only).
+              بذلات التتبع الملبوسة وحساسات القصور الذاتي (IMU Suits) وكاميرات الأشعة تحت الحمراء باهظة التكلفة ومقيدة للمستخدم، مما استوجب ابتكار نظام يعتمد حصرياً على كاميرا ويب عادية (Monocular RGB).
             </div>
           </div>
           <div class="card card-emerald">
-            <div class="card-title">🤖 الحاجة لنقل المهارات وتخزينها (LfD)</div>
+            <div class="card-title">🤖 من التوجيه اللحظي إلى تعلّم المهارات (LfD)</div>
             <div class="card-text">
-              توجيه الروبوت لحظياً (Teleoperation) غير كافٍ بذاته؛ فالهدف الحقيقي هو **تعلّم المهارة من العرض البشري** وتخزينها ليعيد الروبوت تنفيذها ذاتياً ومستقلاً.
+              التوجيه اللحظي (Teleoperation) يتطلب وجود الإنسان دوماً أمام الكاميرا؛ والهدف الهندسي الأسمى هو **تعلّم المهارة من العرض البشري (LfD)** وتخزينها ليعيد الروبوت تنفيذها ذاتياً ومستقلاً.
             </div>
           </div>
         </div>
 
-        <div class="card" style="background: #eff6ff; border-color: #bfdbfe; margin-top: 10px;">
-          <div class="card-title" style="color: var(--primary);">🎯 الرؤية الاستراتيجية للنظام</div>
-          <div class="card-text" style="color: #1e3a8a;">
-            بناء خط أنابيب متكامل منخفض التكلفة يربط بين معالجة الصور الرقمية في الزمن الحقيقي ومحاكاة الروبوتات البشرية عبر شبكات الرؤية الحركية وتجريد المهارات بصيغة مسارات زمنية (Trajectory JSON).
+        <div class="card card-purple" style="margin-top: 6px;">
+          <div class="card-title">🎯 الرؤية الاستراتيجية للنظام</div>
+          <div class="card-text">
+            دمج خوارزميات معالجة الصور الرقمية والشبكات العصبية الخفيفة مع كينماتيكا الروبوتات البشرية ومحركات المحاكاة الفيزيائية في بيئة عمل موحدة ومنخفضة التكلفة تعمل في الزمن الحقيقي الصارم (&lt; 23 ms).
           </div>
         </div>
       </div>
@@ -523,145 +552,220 @@
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الأهداف الهندسية</div>
-          <div class="slide-title">الأهداف والمخرجات العملية المنجزة</div>
+          <div class="slide-category">الأهداف والمخرجات الهندسية</div>
+          <div class="slide-title">أهداف المشروع العملية المنجزة بدقة</div>
         </div>
         <span class="slide-badge">Objectives & Deliverables</span>
       </div>
       <div class="slide-body">
         <div class="grid-2">
           <div class="card card-accent">
-            <div class="card-title">1. معالجة الفيديو في الزمن الحقيقي (Real-Time Vision)</div>
+            <div class="card-title">1. معالجة الفيديو في الزمن الحقيقي (Real-Time Perception)</div>
             <div class="card-text">
-              قراءة ومعالجة تدفق الفيديو بدقة 640x480 وبسرعة 30 FPS مستقرة دون استهلاك مفرط للمعالج، وتجاوز مشاكل نظام تشغيل ويندوز عبر ترميز MJPG وواجهة DirectShow.
+              التقاط ومعالجة تدفق الفيديو المباشر من كاميرا الويب بدقة 640x480 وبسرعة 30 إطار/ثانية مستقرة، وتفادي مشاكل نظام ويندوز عبر ترميز MJPG وواجهة DirectShow.
             </div>
           </div>
           <div class="card card-cyan">
-            <div class="card-title">2. التقدير البصري للوضعية والكينماتيكا ثلاثية الأبعاد</div>
+            <div class="card-title">2. التقدير البصري ثلاثي الأبعاد والكينماتيكا</div>
             <div class="card-text">
-              استخراج 33 نقطة مفصلية للهيكل البشري عبر MediaPipe Pose، واشتقاق زوايا مفاصل الروبوت NAO الـ 20 عبر الضرب القياسي والإسقاط الفراغي.
+              استخراج 33 نقطة مفصلية للهيكل البشري عبر MediaPipe Pose، واشتقاق زوايا مفاصل الروبوت NAO الـ 20 وتصفيتها بمرشح التنعيم الأسي الرقمي (EMA).
             </div>
           </div>
           <div class="card card-amber">
-            <div class="card-title">3. حل معضلة السقوط الفيزيائي (Supervisor Anti-Fall)</div>
+            <div class="card-title">3. حل مشكلة السقوط الفيزيائي (Supervisor Anti-Fall)</div>
             <div class="card-text">
-              برمجة حزام توازن مشرف يثبت السرعة المتجهية للجذع لمنع انقلاب الروبوت عند رفع القدم للركل، مع ترك محركات الأرجل والأذرع تتحرك بحرية كاملة.
+              برمجة حزام توازن مشرف يثبت السرعة المتجهية للجذع لمنع انقلاب الروبوت عند رفع القدم للركل، مع ترك محركات الأرجل والأذرع تتحرك بحرية كاملة دون تصفير عزمها.
             </div>
           </div>
           <div class="card card-emerald">
             <div class="card-title">4. محرك تعلّم المهارات وتخزين المسارات (LfD Engine)</div>
             <div class="card-text">
-              تسجيل الحركات البشرية في ملفات JSON وتشغيلها ذاتياً عبر مشغل الاستيفاء الخطي الزمني (Timestamp LERP) بمطابقة تامة 1:1 لسرعة الإنسان.
+              تسجيل الحركات كمسارات زمنية في ملفات JSON وتشغيلها ذاتياً عبر مشغل الاستيفاء الخطي الزمني (Timestamp LERP) بمطابقة تامة 1:1 لسرعة حركة الإنسان.
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 4: ARCHITECTURE -->
+    <!-- SLIDE 4: FULL SYSTEM ARCHITECTURE -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">معمارية النظام</div>
-          <div class="slide-title">مخطط خط أنابيب المعالجة والتراسل (Pipeline Architecture)</div>
+          <div class="slide-category">المعمارية الشاملة</div>
+          <div class="slide-title">المعمارية الشاملة ومكونات النظام المتكامل (System Stack)</div>
         </div>
-        <span class="slide-badge">System Architecture</span>
+        <span class="slide-badge">Full Architecture</span>
       </div>
       <div class="slide-body">
-        <div class="code-box">
-[كاميرا الويب (DirectShow MJPG 640x480 @ 30 FPS)]
-         ↓ (cv2.flip + BGR to RGB)
-[نموذج MediaPipe Pose] ───→ (استخراج 33 نقطة ثلاثية الأبعاد: X, Y, Z, Visibility)
-         ↓
-[محرك الحسابات الكينماتيكية] ───→ (حساب زوايا 20 مفصلاً للأطراف العلوية والسفلية)
-         ↓
-[مرشح التنعيم الأسي EMA] ───→ (alpha=0.35 في التوجيه الحي لإزالة ارتعاش الكاميرا)
-         ↓
-[محرك المهارات LfD] ───(تسجيل / تشغيل)───→ [مكتبة المهارات Trajectory JSON]
-         ↓ (حزمة JSON عبر TCP Socket Port 10006 بزمن 1.1 ms)
-[متحكم الروبوت المشرف في Webots] ───→ (حزام التوازن torso.setVelocity([0,0,0,0,0,0]))
-         ↓
-[محركات روبوت SoftBank NAO (20 محرك مفصلي فعال)]
+        <div class="grid-4">
+          <div class="card card-accent">
+            <div class="card-title">1. نواة الرؤية والتوجيه</div>
+            <div class="card-text">
+              <code>vision_to_nao_teleop.py</code><br>
+              معالجة الكاميرا، MediaPipe 33 نقطة، الكينماتيكا، مرشح EMA، مسجل المهارات LfD، وشريط أدوات GUI بالأزرار التفاعلية.
+            </div>
+          </div>
+
+          <div class="card card-emerald">
+            <div class="card-title">2. محاكاة الروبوت Webots</div>
+            <div class="card-text">
+              <code>nao_teleop.py</code> & <code>.wbt</code><br>
+              روبوت SoftBank NAO (20 مفصلاً)، خادم TCP على المنفذ 10006، حزام التوازن المشرف، وآلية النهوض الذاتي.
+            </div>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="card-title">3. حزم الإدراك المعيارية</div>
+            <div class="card-text">
+              <code>src/pose2skill_perception/</code><br>
+              عقد بايثون معيارية (Body Pose Node, Hand Pose Node, Object Tracker Node) جاهزة للتكامل المستقبلي مع أنظمة ROS 2.
+            </div>
+          </div>
+
+          <div class="card card-purple">
+            <div class="card-title">4. لوحة التحكم والتوأم الرقمي</div>
+            <div class="card-text">
+              <code>web_dashboard/</code><br>
+              تطبيق React + Three.js + WebGL للعرض ثلاثي الأبعاد للروبوت والهيكل البشري والتحكم بالمهارات عبر المتصفح.
+            </div>
+          </div>
         </div>
 
-        <div class="grid-4" style="margin-top: 10px;">
-          <div class="card" style="text-align: center;">
-            <div class="stat-number">30</div>
-            <div class="stat-label">إطار / ثانية (FPS)</div>
-          </div>
-          <div class="card" style="text-align: center;">
-            <div class="stat-number">22.5</div>
-            <div class="stat-label">مللي ثانية التأخير الكلي</div>
-          </div>
-          <div class="card" style="text-align: center;">
-            <div class="stat-number">33</div>
-            <div class="stat-label">نقطة تتبع من MediaPipe</div>
-          </div>
-          <div class="card" style="text-align: center;">
-            <div class="stat-number">20</div>
-            <div class="stat-label">مفصل روبوتي فعال</div>
-          </div>
+        <div class="code-box" style="margin-top: 6px;">
+[Webcam Feed] ──(DirectShow MJPG)──→ [MediaPipe Pose: 33 Landmarks] ──→ [Kinematics & EMA Filter]
+                                                                                     ↓
+[Webots Simulator: SoftBank NAO] ←──(TCP Socket 10006)── [LfD Engine: Trajectory JSON & LERP]
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 5: COMPUTER VISION -->
+    <!-- SLIDE 5: DIGITAL IMAGE PROCESSING -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">طبقة معالجة الصور الرقمية</div>
-          <div class="slide-title">الرؤية الحاسوبية واستخراج الوضعية الهيكلية</div>
+          <div class="slide-category">معالجة الصور الرقمية</div>
+          <div class="slide-title">خط أنابيب معالجة الصور الرقمية واستخراج المعالم</div>
         </div>
-        <span class="slide-badge">Computer Vision</span>
+        <span class="slide-badge">Image Processing Pipeline</span>
       </div>
       <div class="slide-body">
         <div class="grid-2">
           <div class="card card-accent">
             <div class="card-title">📷 حل معضلة كاميرا ويندوز (MSMF vs DirectShow)</div>
             <div class="card-text">
-              واجهة MSMF الافتراضية في ويندوز تعاني من أخطاء في التحويل اللوني وتراكم الذاكرة المؤقتة (Buffering Latency > 200ms).<br>
-              <strong>الحل المعتمد:</strong> تفعيل <code>DirectShow</code> مع ترميز <code>MJPG</code> عبر:
-              <div class="code-box" style="margin-top: 6px;">
+              واجهة MSMF الافتراضية في ويندوز تسبب خطأ تحويل الألوان وتراكماً للإطارات في الذاكرة المؤقتة (تأخير &gt; 200 ms).<br>
+              <strong>الحل الهندسي:</strong> تعطيل التحويلات الصلبة وتفعيل واجهة <code>DirectShow</code> مع ترميز <code>MJPG</code> لخفض زمن الالتقاط إلى <strong>4.2 ms فقط</strong>:
+              <div class="code-box" style="margin-top: 4px;">
 os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
               </div>
             </div>
           </div>
 
           <div class="card card-cyan">
-            <div class="card-title">👁️ نموذج MediaPipe Pose (33 نقطة ثلاثية الأبعاد)</div>
+            <div class="card-title">🧠 بنية شبكة MediaPipe BlazePose العصبية</div>
             <div class="card-text">
-              شبكة عصبية التفافية عميقة (BlazePose) تعمل على مرحلتين:
-              <ol style="margin-right: 18px; margin-top: 4px;">
-                <li><strong>كاشف الوجه والجذع (Detector):</strong> تحديد مستطيل إحاطة الشخص في الإطار.</li>
-                <li><strong>مقدّر المعالم (Landmark Regressor):</strong> التنبؤ بإحداثيات 33 نقطة ثلاثية الأبعاد ($X, Y, Z$) مع ثقة الرؤية ($v \in [0, 1]$).</li>
+              تعمل الشبكة العميقة بنظام مرحلي فائق الكفاءة:
+              <ol style="margin-right: 18px; margin-top: 4px; line-height: 1.6;">
+                <li><strong>كاشف الوجه والجذع (Detector Network):</strong> يحدد موقع الشخص ومربع الإحاطة في الإطار.</li>
+                <li><strong>مقدّر المعالم ثلاثية الأبعاد (Landmark 3D Regressor):</strong> يستخرج إحداثيات 33 نقطة مفصلية ($X, Y, Z$) مع معامل الثقة ($Visibility \in [0, 1]$).</li>
               </ol>
             </div>
           </div>
         </div>
 
         <div class="card card-emerald">
-          <div class="card-title">🔄 المعالجة المسبقة للإطارات (Preprocessing Pipeline)</div>
+          <div class="card-title">🔄 المعالجة المسبقة والتطبيع الفضائي (Preprocessing & Spatial Normalization)</div>
           <div class="card-text">
-            قلب الإطار أفقياً عبر <code>cv2.flip(frame, 1)</code> لتحقيق مرآة بصرية طبيعية للمستخدم، يليه التحويل من الفضاء اللوني $BGR$ إلى $RGB$، وتطبيع الإحداثيات بالنسبة لعرض وارتفاع الإطار لمنع التأثر بمسافة المستخدم عن الكاميرا.
+            قلب الإطار أفقياً عبر <code>cv2.flip(frame, 1)</code> لتحقيق مرآة بصرية طبيعية، يليه التحويل من الفضاء اللوني $BGR$ إلى $RGB$، وتطبيع إحداثيات النقاط الفراغية بالنسبة لعرض الإطار وارتفاعه لمنع تأثر الزوايا بمسافة وقوف المستخدم عن الكاميرا.
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 6: KINEMATICS -->
+    <!-- SLIDE 6: MEDIAPIPE 33 LANDMARKS -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الأساس الرياضي</div>
-          <div class="slide-title">الكينماتيكا وحساب زوايا المفاصل ثلاثية الأبعاد</div>
+          <div class="slide-category">هندسة المعالم البصرية</div>
+          <div class="slide-title">دليل نقاط MediaPipe الـ 33 وتصنيفها التشريحي والوظيفي</div>
         </div>
-        <span class="slide-badge">Kinematics Math</span>
+        <span class="slide-badge">33 Pose Landmarks</span>
+      </div>
+      <div class="slide-body">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 14%;">المجموعة التشريحية</th>
+              <th style="width: 20%;">أرقام المعالم (Indices)</th>
+              <th style="width: 28%;">أهم النقاط المفصلية</th>
+              <th>الاستخدام الوظيفي في كود كينماتيكا المشروع</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>معالم الرأس والوجه</strong></td>
+              <td><code>0 - 10</code></td>
+              <td>الأنف (0)، العينين (1-6)، الأذنين (7-8)، الفم (9-10)</td>
+              <td>استخراج اتجاه إمالة ودوران الرأس أفقياً ورأسياً (HeadYaw & HeadPitch).</td>
+            </tr>
+            <tr>
+              <td><strong>الأطراف العلوية</strong></td>
+              <td><code>11 - 16</code></td>
+              <td>الكتفان (11-12)، الكوعان (13-14)، المعصمان (15-16)</td>
+              <td>حساب حركة الأكتاف (Pitch & Roll)، ثني ودوران الأكواع (Elbow Roll & Yaw).</td>
+            </tr>
+            <tr>
+              <td><strong>أطراف الكفين</strong></td>
+              <td><code>17 - 22</code></td>
+              <td>الخنصر (17-18)، السبابة (19-20)، الإبهام (21-22)</td>
+              <td>تحديد إشارة كف اليد الإجمالية وتوجيه الساعد.</td>
+            </tr>
+            <tr>
+              <td><strong>الجذع والحوض</strong></td>
+              <td><code>23 - 24</code></td>
+              <td>الورك الأيسر (23)، الورك الأيمن (24)</td>
+              <td>نقطة ارتكاز الجسم وحساب ثني الحوض للأمام والخلف (HipPitch).</td>
+            </tr>
+            <tr>
+              <td><strong>الأطراف السفلية</strong></td>
+              <td><code>25 - 28</code></td>
+              <td>الركبتان (25-26)، الكاحلان (27-28)</td>
+              <td>زوايا ثني الركبتين (KneePitch)، كشف الركل، وانحناء الكاحل (AnklePitch).</td>
+            </tr>
+            <tr>
+              <td><strong>أقدام الارتكاز</strong></td>
+              <td><code>29 - 32</code></td>
+              <td>العقبان/الكعبان (29-30)، مشط القدمين (31-32)</td>
+              <td>توجيه باطن القدم وموازاة مشط القدم مع سطح الأرض لمنع الانقلاب.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="card card-cyan" style="margin-top: 6px;">
+          <div class="card-title">💡 الثقة البصرية (Visibility Confidence Threshold)</div>
+          <div class="card-text">
+            يتحقق النظام برمجياً من شرط <code>(r_knee.visibility &gt; 0.20 and l_knee.visibility &gt; 0.20)</code> قبل تفعيل كينماتيكا الأرجل، مما يتيح التبديل السلس بين وضعية الجسم الكامل ووضعية الجذع العلوي فقط في حال كان المستخدم جالساً.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: UPPER BODY KINEMATICS -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">الأساس الرياضي والكينماتيكي</div>
+          <div class="slide-title">كينماتيكا الرأس والأطراف العلوية واشتقاق الزوايا</div>
+        </div>
+        <span class="slide-badge">Upper Body Kinematics</span>
       </div>
       <div class="slide-body">
         <div class="card card-accent">
-          <div class="card-title">📐 المعادلة العامة لحساب الزاوية ثلاثية الأبعاد بين ثلاثة معالم (A, B, C)</div>
+          <div class="card-title">📐 الدالة الكينماتيكية العامة لحساب الزاوية ثلاثية الأبعاد بين ثلاثة معالم (A, B, C)</div>
           <div class="math-box">
             \vec{u} = \mathbf{p}_A - \mathbf{p}_B, \quad \vec{v} = \mathbf{p}_C - \mathbf{p}_B, \quad 
             \theta = \arccos\left( \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\| + 10^{-6}} \right) \times \frac{180}{\pi}
@@ -669,43 +773,44 @@ cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         </div>
 
         <div class="grid-2">
-          <div class="card">
-            <div class="card-title">1. مفاصل الرأس (Head Yaw & Pitch)</div>
+          <div class="card card-cyan">
+            <div class="card-title">1. مفاصل الرأس (Head Yaw & Head Pitch)</div>
             <div class="card-text">
-              يتم استخراج منتصف المسافة بين الكتفين كمرجع للصدر، وحساب انحراف الأنف:
+              حساب نقطة منتصف الصدر $M = (L_{sh} + R_{sh}) / 2$ واستخراج إزاحة الأنف:
               <div class="code-box" style="margin-top: 4px;">
-head_yaw = clip((nose.x - shoulder_mid_x) * 2.8, -1.8, 1.8)
-head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
+head_yaw = clip((nose.x - M.x) * 2.8, -1.8, 1.8)
+head_pitch = clip((nose.y - (M.y - 0.16)) * 2.5, -0.6, 0.5)
               </div>
             </div>
           </div>
 
-          <div class="card">
-            <div class="card-title">2. مفاصل الأذرع (Shoulders & Elbows)</div>
+          <div class="card card-emerald">
+            <div class="card-title">2. مفاصل الأذرع والأكتاف والأكواع</div>
             <div class="card-text">
-              &bull; <strong>الكتف للأمام (Pitch):</strong> $\arcsin(u_y / L)$ مع تقييد المدى.<br>
-              &bull; <strong>الكتف جانبياً (Roll):</strong> زاوية إبعاد العضد (Abduction).<br>
-              &bull; <strong>ثني الكوع (Roll):</strong> $180^\circ - \text{calculate\_angle\_3d}(\text{Sh, El, Wr})$.
+              &bull; <strong>ShoulderPitch (للأمام/الخلف):</strong> $\arcsin(u_y / L)$ مع تقييد المدى.<br>
+              &bull; <strong>ShoulderRoll (فتح جانبي):</strong> $\text{Abduction} = \max(0.0, u_x / L) \times 1.30$.<br>
+              &bull; <strong>ElbowRoll (ثني الكوع):</strong> $180^\circ - \text{calculate\_angle\_3d}(\text{Sh, El, Wr})$.<br>
+              &bull; <strong>ElbowYaw (دوران الساعد):</strong> $\text{clip}(-0.5 \times \text{Bend}, -1.5, 0.0)$.
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 7: LEGS KINEMATICS -->
+    <!-- SLIDE 8: LOWER BODY KINEMATICS -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الكينماتيكا المتقدمة</div>
-          <div class="slide-title">كينماتيكا الأطراف السفلية، الركل، والقرفصاء</div>
+          <div class="slide-category">الكينماتيكا المتقدمة والتوازن</div>
+          <div class="slide-title">كينماتيكا الأطراف السفلية، الركل، وتوازن القرفصاء</div>
         </div>
-        <span class="slide-badge">Legs & Squats</span>
+        <span class="slide-badge">Lower Body & Kicking</span>
       </div>
       <div class="slide-body">
         <div class="card card-cyan">
           <div class="card-title">🦶 خوارزمية كشف ركل ورفع القدمين تلقائياً</div>
           <div class="card-text">
-            حساب فرق الارتفاع الرأسي بين الكاحلين: $\Delta_{\text{ank}} = \text{L\_ank}_y - \text{R\_ank}_y$
+            يتم فحص فرق الارتفاع الرأسي لكاحل القدمين في نظام الإحداثيات: $\Delta_{\text{ank}} = \text{L\_ank}_y - \text{R\_ank}_y$
           </div>
         </div>
 
@@ -713,20 +818,22 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
           <div class="card card-emerald">
             <div class="card-title">🥋 ركل بالقدم اليمنى</div>
             <div class="card-text">
-              عندما $\Delta_{\text{ank}} > 0.06$:<br>
+              عندما $\Delta_{\text{ank}} &gt; 0.06$:<br>
               &bull; <code>RKneePitch = bend * 1.1</code><br>
               &bull; <code>RHipPitch = -0.75 * RKnee</code><br>
-              &bull; القدم اليسرى مثبتة كقاعدة ارتكاز على الأرض.
+              &bull; <code>RAnklePitch = -0.15</code><br>
+              &bull; القدم اليسرى مثبتة كقاعدة ارتكاز.
             </div>
           </div>
 
           <div class="card card-accent">
             <div class="card-title">🥋 ركل بالقدم اليسرى</div>
             <div class="card-text">
-              عندما $\Delta_{\text{ank}} < -0.06$:<br>
+              عندما $\Delta_{\text{ank}} &lt; -0.06$:<br>
               &bull; <code>LKneePitch = bend * 1.1</code><br>
               &bull; <code>LHipPitch = -0.75 * LKnee</code><br>
-              &bull; القدم اليمنى مثبتة كقاعدة ارتكاز على الأرض.
+              &bull; <code>LAnklePitch = -0.15</code><br>
+              &bull; القدم اليمنى مثبتة كقاعدة ارتكاز.
             </div>
           </div>
 
@@ -735,20 +842,20 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
             <div class="card-text">
               عند ثني الركبتين معاً:<br>
               &bull; <code>KneePitch = bend * 0.95</code><br>
-              &bull; <code>HipPitch = -0.52 * Knee</code><br>
-              &bull; <code>AnklePitch = -0.48 * Knee</code> لموازنة باطن القدم مع الأرض.
+              &bull; <code>HipPitch = -0.52 * Knee</code> (انحناء الحوض)<br>
+              &bull; <code>AnklePitch = -0.48 * Knee</code> (موازنة باطن القدم مع الأرض لمنع الانقلاب).
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 8: EMA FILTER -->
+    <!-- SLIDE 9: EMA FILTER -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">معالجة الإشارات والتحكم</div>
-          <div class="slide-title">مرشح التنعيم الأسي الرقمي (EMA Filter)</div>
+          <div class="slide-category">معالجة الإشارات الرقمية</div>
+          <div class="slide-title">مرشح التنعيم الأسي الرقمي (Exponential Moving Average)</div>
         </div>
         <span class="slide-badge">Signal Smoothing</span>
       </div>
@@ -759,7 +866,7 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
             \hat{q}(t) = \alpha \cdot q(t) + (1 - \alpha) \cdot \hat{q}(t - \Delta t)
           </div>
           <div class="card-text" style="text-align: center; margin-top: 4px;">
-            حيث $q(t)$ هي زاوية المفصل الخام من الكاميرا، و $\hat{q}(t)$ هي القيمة المنعمة المرسلة لمحركات الروبوت.
+            حيث $q(t)$ هي الزاوية الخام المستخرجة من الكاميرا، و $\hat{q}(t)$ هي القيمة المصفاة المرسلة لمحركات الروبوت.
           </div>
         </div>
 
@@ -768,7 +875,7 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
             <div class="card-title">1. وضع التوجيه الحي (Live Teleoperation)</div>
             <div class="card-text">
               &bull; <strong>المعامل المعتمد:</strong> $\alpha = 0.35$<br>
-              &bull; <strong>الوظيفة:</strong> مرشح تمرير منخفض (Low-Pass Filter) يخمد ارتعاش اليد وضجيج الحساس في الإضاءة المتغيرة، مع إبقاء التأخير الزمني دون 35 مللي ثانية لضمان استجابة المحركات الحية.
+              &bull; <strong>الوظيفة الفيزيائية:</strong> يعمل كمرشح تمرير منخفض (Low-Pass Filter) يخمد ارتعاش اليد والضجيج اللحظي لحساس الكاميرا، مع إبقاء زمن الاستجابة دون 35 مللي ثانية لمنع أي تأخير بصري ملحوظ.
             </div>
           </div>
 
@@ -776,32 +883,33 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
             <div class="card-title">2. وضع تشغيل المهارات (Skill Replay)</div>
             <div class="card-text">
               &bull; <strong>المعامل المعتمد:</strong> $\alpha = 1.0$<br>
-              &bull; <strong>الوظيفة:</strong> إلغاء كبح التنعيم أثناء إعادة تشغيل المهارات المسجلة؛ لأن المسار مسجل ومصفى مسبقاً، مما يمنح الروبوت عزم الوصول الكامل لأقصى المدى الحركي المسجل بنسبة 100%.
+              &bull; <strong>الوظيفة الفيزيائية:</strong> إلغاء كبح التنعيم أثناء إعادة تشغيل المهارات المسجلة؛ لأن المسار مسجل ومصفى مسبقاً، مما يمنح محركات الروبوت عزم الوصول الكامل لأقصى المدى الحركي المسجل بنسبة 100%.
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 9: LFD ENGINE -->
+    <!-- SLIDE 10: LFD ENGINE & LERP -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الذكاء الاصطناعي وتعلّم المهارات</div>
+          <div class="slide-category">تعلّم المهارات من العرض البشري</div>
           <div class="slide-title">محرك LfD ومشغل الاستيفاء الخطي الزمني (Timestamp LERP)</div>
         </div>
-        <span class="slide-badge">LfD Engine</span>
+        <span class="slide-badge">LfD Engine & LERP</span>
       </div>
       <div class="slide-body">
         <div class="grid-2">
           <div class="card card-accent">
-            <div class="card-title">💾 بنية ملفات المهارات المسجلة (JSON Schema)</div>
+            <div class="card-title">💾 بنية ملف المهارة الحركية (JSON Schema)</div>
             <div class="card-text">
-              يتم حفظ كل مهارة كمتتالية زمنية من الزوايا مع طابع زمني حقيقي $t$ بالثواني:
+              تخزين مسار الحركة كمتتالية زمنية خفيفة وقابلة للنقل:
               <div class="code-box" style="margin-top: 4px;">
 {
   "name": "skill_martial_arts_kick.json",
   "duration_seconds": 3.42,
+  "frame_count": 103,
   "trajectory": [
     {"time": 0.00, "joints": {"r_knee_pitch": 0.0, ...}},
     {"time": 0.033, "joints": {"r_knee_pitch": 0.85, ...}}
@@ -814,9 +922,10 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
           <div class="card card-emerald">
             <div class="card-title">⏱️ مشغل الاستيفاء الخطي الزمني (Timestamp LERP)</div>
             <div class="card-text">
-              لحساب زوايا المفاصل عند الزمن المنقضي الفعلي $\tau$:
+              لحساب زوايا المفاصل عند الزمن المنقضي الفعلي $\tau = t_{\text{now}} - t_{\text{start}}$:
               <div class="math-box" style="margin: 6px 0;">
-                \beta = \frac{\tau - t_k}{t_{k+1} - t_k}, \quad q(\tau) = q(t_k) + \beta \cdot (q(t_{k+1}) - q(t_k))
+                \beta = \text{clip}\left(\frac{\tau - t_k}{t_{k+1} - t_k}, \; 0.0, \; 1.0\right), \quad 
+                q(\tau) = q(t_k) + \beta \cdot (q(t_{k+1}) - q(t_k))
               </div>
               &bull; <strong>الفائدة الهندسية:</strong> فصل سرعة تشغيل المهارة عن تفاوت سرعة المعالج، وتحقيق مطابقة زمنية بنسبة <strong>1:1</strong> لسرعة حركة الإنسان الأصلية.
             </div>
@@ -825,7 +934,7 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
       </div>
     </div>
 
-    <!-- SLIDE 10: SUPERVISOR HARNESS -->
+    <!-- SLIDE 11: SUPERVISOR ANTI-FALL HARNESS -->
     <div class="slide">
       <div class="slide-header">
         <div>
@@ -837,9 +946,9 @@ head_pitch = clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)
       <div class="slide-body">
         <div class="grid-2">
           <div class="card card-amber">
-            <div class="card-title">⚠️ معضلة السقوط الفيزيائي للروبوت</div>
+            <div class="card-title">⚠️ معضلة السقوط الفيزيائي في Webots</div>
             <div class="card-text">
-              في المحاكاة الواقعية، يؤدي رفع قدم واحدة أو الانحناء السريع إلى خروج مركز الثقل (Center of Mass) عن قاعدة الارتكاز الضيقة لقدم NAO، مما يولّد عزم انقلاب فيزيائي يطرح الروبوت أرضاً فوراً، ومحاولات `resetPhysics()` التقليدية تجمد المحركات تماماً.
+              في المحاكاة الواقعية، يؤدي رفع قدم واحدة أو الانحناء السريع إلى خروج مركز الثقل (CoM) عن قاعدة الارتكاز الضيقة لقدم الروبوت ($160 \times 100 \text{ mm}$)، مما يولّد عزم انقلاب فيزيائي يطرح الروبوت أرضاً فوراً، ومحاولات `resetPhysics()` التقليدية تجمد المحركات تماماً.
             </div>
           </div>
 
@@ -858,59 +967,119 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         <div class="card card-cyan">
           <div class="card-title">🔄 آلية النهوض والاستعادة الذاتية التلقائية (Auto-Recovery)</div>
           <div class="card-text">
-            إذا انخفض الجذع دون $22\text{ cm}$ أو تجاوزت زاوية الميلان $30^\circ$ ($0.5\text{ rad}$)، يقوم النظام تلقائياً وبشكل فوري بإعادة الروبوت لوضعية الوقوف الافتراضية ($Z=0.334\text{ m}$) دون توقف البرنامج.
+            إذا انخفض الجذع دون $22\text{ cm}$ أو مال بزاوية تتجاوز $30^\circ$ ($0.5\text{ rad}$)، يقوم النظام تلقائياً وبشكل فوري بإعادة الروبوت لوضعية الوقوف الافتراضية ($Z=0.334\text{ m}$) دون توقف البرنامج أو إعادة تشغيل المحاكاة.
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 11: GUI & SKILLS -->
+    <!-- SLIDE 12: DUAL INTERACTIVE INTERFACES -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الواجهة التفاعلية</div>
-          <div class="slide-title">الواجهة الرسومية التفاعلية ومكتبة المهارات الجاهزة</div>
+          <div class="slide-category">واجهات المستخدم والتفاعل</div>
+          <div class="slide-title">واجهات التحكم التفاعلية المزدوجة (OpenCV GUI & Web 3D Twin)</div>
         </div>
-        <span class="slide-badge">Interactive GUI</span>
+        <span class="slide-badge">Dual Interfaces</span>
       </div>
       <div class="slide-body">
         <div class="grid-2">
           <div class="card card-accent">
-            <div class="card-title">🖱️ أزرار التحكم بالماوس على شاشة الفيديو</div>
+            <div class="card-title">🖱️ شريط أدوات الكاميرا المباشر (OpenCV Interactive HUD)</div>
             <div class="card-text">
-              شريط أدوات مدمج يدعم النقر بالماوس وتغيير اللون عند التمرير:
-              <ul style="margin-right: 18px; margin-top: 6px;">
+              شريط أدوات مدمج أسفل نافذة الكاميرا يدعم النقر بالماوس وتغيير الألوان عند التمرير:
+              <ul style="margin-right: 18px; margin-top: 4px; line-height: 1.6;">
                 <li><code>[ ● TEACH ]</code>: بدء / إيقاف تسجيل المهارة وحفظها في JSON.</li>
-                <li><code>[ ▶ REPLAY ]</code>: إعادة تشغيل المهارة مع شريط تقدم نسبي (%).</li>
-                <li><code>[ < ]</code> و <code>[ > ]</code>: التنقل بين المهارات المسجلة.</li>
-                <li><code>[ 🦿 SQUAT ]</code>: تفعيل / إلغاء القرفصاء اليدوي.</li>
-                <li><code>[ ✖ EXIT ]</code>: خروج نظيف وتحرير الكاميرا والسوكيت.</li>
+                <li><code>[ ▶ REPLAY ]</code>: إعادة تشغيل المهارة المحددة مع شريط تقدم نسبي (%).</li>
+                <li><code>[ &lt; ]</code> و <code>[ &gt; ]</code>: استعراض واختيار المهارات المسجلة.</li>
+                <li><code>[ 🦿 SQUAT ]</code>: تفعيل / إلغاء وضعية القرفصاء اليدوية.</li>
+                <li><code>[ ✖ EXIT ]</code>: خروج نظيف وتحرير الكاميرا والمقبس الشبكي.</li>
               </ul>
             </div>
           </div>
 
-          <div class="card card-emerald">
-            <div class="card-title">🥋 مكتبة المهارات الحركية الجاهزة بالمشروع</div>
+          <div class="card card-purple">
+            <div class="card-title">🌐 لوحة التحكم ثلاثية الأبعاد (Web 3D Digital Twin)</div>
             <div class="card-text">
-              تم تسجيل واختبار 4 مهارات حركية قياسية متكاملة:
-              <ol style="margin-right: 18px; margin-top: 6px;">
-                <li><strong>ركلة الفنون القتالية (Martial Arts Kick):</strong> ركل بالقدم اليمنى مع ثني الورك وموازنة الجذع.</li>
-                <li><strong>القرفصاء الرياضي (Athletic Squat):</strong> ثني متزامن للركبتين والحوض والكواحل.</li>
-                <li><strong>تحية النصر (Double Arm Salute):</strong> رفع متناسق للذراعين للأعلى.</li>
-                <li><strong>التلويح والترحيب (Wave Greeting):</strong> رفع الذراع والتلويح بالكف.</li>
-              </ol>
+              لوحة تحكم حديثة مبنية بـ React + Three.js + WebGL داخل مجلد <code>web_dashboard/</code>:
+              <ul style="margin-right: 18px; margin-top: 4px; line-height: 1.6;">
+                <li><strong>Human3DSkeleton:</strong> عرض الهيكل العظمي البشري في فضاء ثلاثي الأبعاد.</li>
+                <li><strong>HumanoidRobot3D:</strong> توأم رقمي لروبوت NAO يعكس حركاته لحظياً.</li>
+                <li><strong>SkillTeachingManager:</strong> واجهة رسومية لإدارة وتسجيل وتشغيل المهارات عبر المتصفح.</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 12: EXPERIMENTAL RESULTS -->
+    <!-- SLIDE 13: PRE-RECORDED SKILLS -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">التجارب والتحقق</div>
-          <div class="slide-title">النتائج التجريبية وقياسات الأداء وزمن المعالجة</div>
+          <div class="slide-category">المكتبة الحركية القياسية</div>
+          <div class="slide-title">مكتبة المهارات الحركية الجاهزة بالمشروع (Skills Library)</div>
+        </div>
+        <span class="slide-badge">Skills Library</span>
+      </div>
+      <div class="slide-body">
+        <div class="grid-4">
+          <div class="card card-emerald">
+            <div class="card-title">🥋 ركلة الفنون القتالية</div>
+            <div class="card-text">
+              <code>skill_martial_arts_kick</code><br>
+              &bull; <strong>المدة:</strong> 3.4 ثانية<br>
+              &bull; <strong>الإطارات:</strong> 103 إطاراً<br>
+              &bull; <strong>الحركة:</strong> ركل بالقدم اليمنى للأمام مع ثني الورك وموازنة الجذع بالذراعين.
+            </div>
+          </div>
+
+          <div class="card card-accent">
+            <div class="card-title">🏋️ القرفصاء الرياضي</div>
+            <div class="card-text">
+              <code>skill_athletic_squat</code><br>
+              &bull; <strong>المدة:</strong> 4.1 ثانية<br>
+              &bull; <strong>الإطارات:</strong> 124 إطاراً<br>
+              &bull; <strong>الحركة:</strong> نزول وصعود متناسق عبر ثني الركبتين والحوض وموازنة الكاحل.
+            </div>
+          </div>
+
+          <div class="card card-cyan">
+            <div class="card-title">🎖️ تحية النصر المزدوجة</div>
+            <div class="card-text">
+              <code>skill_double_arm_salute</code><br>
+              &bull; <strong>المدة:</strong> 3.1 ثانية<br>
+              &bull; <strong>الإطارات:</strong> 93 إطاراً<br>
+              &bull; <strong>الحركة:</strong> رفع الذراعين للأعلى بزاوية $90^\circ$ بتناسق كامل.
+            </div>
+          </div>
+
+          <div class="card card-amber">
+            <div class="card-title">👋 التلويح والترحيب</div>
+            <div class="card-text">
+              <code>skill_wave_greeting</code><br>
+              &bull; <strong>المدة:</strong> 2.8 ثانية<br>
+              &bull; <strong>الإطارات:</strong> 85 إطاراً<br>
+              &bull; <strong>الحركة:</strong> رفع الذراع الأيمن والتلويح بالساعد يميناً ويساراً.
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #f0fdf4; border-color: #bbf7d0; margin-top: 6px;">
+          <div class="card-title" style="color: var(--accent-emerald);">✨ استقلالية المهارات وتعددها</div>
+          <div class="card-text" style="color: #166534;">
+            يمكن للمستخدم تسجيل أي حركة جديدة كلياً بمجرد الضغط على زر <code>TEACH</code>، حيث يتم إنشاء ملف JSON تلقائياً في مجلد <code>skills/</code> وإضافته فوراً لقائمة المهارات القابلة للاختيار والتشغيل.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 14: BENCHMARKS & LATENCY -->
+    <div class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="slide-category">النتائج التجريبية والقياسات</div>
+          <div class="slide-title">قياسات الأداء وزمن المعالجة التفصيلي (Latency Benchmarks)</div>
         </div>
         <span class="slide-badge">Benchmarks</span>
       </div>
@@ -955,8 +1124,8 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
               <td>4.8%</td>
               <td>30 FPS</td>
             </tr>
-            <tr style="font-weight: 800; background: #e0f2fe; color: var(--primary);">
-              <td>التأخير الإجمالي بين الكاميرا وحركة الروبوت (End-to-End)</td>
+            <tr style="font-weight: 900; background: #e0f2fe; color: var(--primary);">
+              <td>التأخير الإجمالي بين الكاميرا وحركة الروبوت (End-to-End Latency)</td>
               <td>22.5 ms</td>
               <td>100%</td>
               <td>30 FPS مستقر تماماً</td>
@@ -964,23 +1133,31 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
           </tbody>
         </table>
 
-        <div class="card card-emerald" style="margin-top: 10px;">
-          <div class="card-title">💡 دلالة النتائج الرقمية</div>
-          <div class="card-text">
-            التأخير الكلي (22.5 مللي ثانية) أقل بكثير من زمن الإطار الواحد (33.3 مللي ثانية)، مما يثبت أن النظام يعمل في الزمن الحقيقي الصارم (Hard Real-Time Perception) دون أي تراكم للإطارات أو تباطؤ في المحاكاة.
+        <div class="grid-2" style="margin-top: 6px;">
+          <div class="card card-emerald">
+            <div class="card-title">⚡ زمن الدورة أقل من زمن الإطار الوافد</div>
+            <div class="card-text">
+              زمن الإطار في كاميرا 30 FPS هو $33.3\text{ ms}$، وبما أن معالجة النظام تستغرق $22.5\text{ ms}$ فقط، فهذا يثبت أن المعالج ينتهي قبل وصول الإطار التالي، مما يمنع أي تراكم أو بطء (Zero Frame Queuing Latency).
+            </div>
+          </div>
+          <div class="card card-cyan">
+            <div class="card-title">🖥️ ترشيد استهلاك المعالج (CPU Optimization)</div>
+            <div class="card-text">
+              استهلاك المعالج بقي دون 22% على معالج محمول عادي (Intel Core i5) دون الحاجة لكرت شاشة مخصص (Discrete GPU)، مما يجعل النظام قابلاً للتشغيل في أي مختبر حاسوب جامعي.
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 13: LIMITATIONS & FUTURE WORK -->
+    <!-- SLIDE 15: LIMITATIONS & FUTURE WORK -->
     <div class="slide">
       <div class="slide-header">
         <div>
-          <div class="slide-category">الأمانة العلمية والتطوير</div>
+          <div class="slide-category">الأمانة العلمية والتطلعات</div>
           <div class="slide-title">القيود الفنية الواقعية وآفاق التطوير المستقبلي</div>
         </div>
-        <span class="slide-badge">Limitations & Future</span>
+        <span class="slide-badge">Limitations & Roadmap</span>
       </div>
       <div class="slide-body">
         <div class="grid-2">
@@ -988,8 +1165,9 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
             <div class="card-title">⚠️ القيود الفنية الواقعية (Technical Limitations)</div>
             <div class="card-text">
               <ul style="margin-right: 18px; line-height: 1.7;">
-                <li><strong>حدود تتبع الأصابع:</strong> يقتصر النظام على نموذج MediaPipe Pose (33 نقطة) لتتبع الهيكل العظمي العام، ولا يتضمن تتبعاً لعقل الأصابع الفردية لتفادي هبوط معدل الإطارات.</li>
+                <li><strong>حدود تتبع الأصابع:</strong> يقتصر النظام على نموذج MediaPipe Pose (33 نقطة) لتتبع الهيكل العظمي العام، ولا يتضمن تتبعاً لعقل الأصابع الفردية لتفادي هبوط معدل الإطارات لما دون 15 FPS.</li>
                 <li><strong>إمساك الأجسام في المحاكاة:</strong> مفاصل كف NAO في Webots سلاميات سلبية ذات احتكاك ضعيف، والتقاط الأجسام الصلبة يتطلب خوارزميات تخطيط قبضة متقدمة (Grasp Planning).</li>
+                <li><strong>حساسية الإضاءة الخلفية:</strong> قد تنخفض دقة تتبع الكاحلين في حال كانت الإضاءة ضعيفة جداً خلف المستخدم.</li>
               </ul>
             </div>
           </div>
@@ -998,9 +1176,9 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
             <div class="card-title">🚀 آفاق التطوير المستقبلي (Future Horizons)</div>
             <div class="card-text">
               <ul style="margin-right: 18px; line-height: 1.7;">
-                <li><strong>سياسات التوليد الحركي (Diffusion Policy):</strong> تدريب نماذج تعلم عميق توليدية لتعميم المهارات المسجلة والتكيف مع عوائق البيئة.</li>
-                <li><strong>حساسات رد الفعل اللمسي (Tactile Sensors):</strong> إضافة حساسات ضغط على أصابع الروبوت لإتقان مهام الالتقاط الدقيقة.</li>
-                <li><strong>النقل إلى روبوت حقيقي (Sim-to-Real):</strong> نقل المسارات من Webots إلى روبوت NAO الحقيقي في مختبر الجامعة.</li>
+                <li><strong>سياسات التوليد الحركي (Diffusion Policy):</strong> تدريب نماذج تعلم عميق توليدية لتعميم المهارات المسجلة والتكيف الذاتي مع عوائق البيئة المحيطة.</li>
+                <li><strong>حساسات رد الفعل اللمسي (Tactile Sensors):</strong> إضافة حساسات ضغط على أصابع الروبوت لإتقان مهام الالتقاط والحمل الدقيقة.</li>
+                <li><strong>النقل إلى روبوت حقيقي (Sim-to-Real Transfer):</strong> نقل المسارات من Webots إلى روبوت SoftBank NAO الحقيقي في مختبر الكلية عبر واجهة Naoqi SDK.</li>
               </ul>
             </div>
           </div>
@@ -1008,19 +1186,22 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
       </div>
     </div>
 
-    <!-- SLIDE 14: CONCLUSION & QA -->
+    <!-- SLIDE 16: CONCLUSION & QA -->
     <div class="slide cover-slide">
-      <div class="cover-univ">خاتمة العرض والمناقشة</div>
-      <h1 class="cover-title" style="font-size: 28px;">شكراً لحسن استماعكم واهتمامكم</h1>
-      <div class="cover-subtitle" style="font-size: 15px;">Pose2Skill-Robot: An Intelligent System for Learning & Transferring Human Skills to Robots</div>
+      <div class="cover-univ">خاتمة العرض والمناقشة الأكاديمية</div>
+      <h1 class="cover-title" style="font-size: 26px;">شكراً لحسن استماعكم واهتمامكم الكريم</h1>
+      <div class="cover-subtitle" style="font-size: 14px;">Pose2Skill-Robot: An Intelligent System for Learning & Transferring Human Skills to Robots</div>
 
-      <div class="card" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15); max-width: 600px; text-align: center; margin: 15px 0;">
-        <div style="color: var(--accent-cyan); font-weight: 800; font-size: 14px; margin-bottom: 6px;">مستودع المشروع المفتوح المصدر (GitHub):</div>
+      <div class="card" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15); max-width: 650px; text-align: center; margin: 12px 0;">
+        <div style="color: var(--accent-cyan); font-weight: 800; font-size: 13px; margin-bottom: 5px;">مستودع المشروع المفتوح المصدر على GitHub:</div>
         <div style="font-family: 'Fira Code', monospace; font-size: 13px; color: #ffffff;">https://github.com/jacobkhaled01-spec/Pose2Skill-Robot</div>
+        <div style="color: #94a3b8; font-size: 11px; margin-top: 6px;">
+          يتضمن التقرير الأكاديمي، ورقة المراجعة، الكود المصدري، وحقيبة التسليم المنظمة.
+        </div>
       </div>
 
-      <div style="color: #cbd5e1; font-size: 14px; margin-top: 10px;">
-        نرحب بأسئلة واستفسارات أستاذ المقرر وأعضاء لجنة المناقشة الموقرة 🎓
+      <div style="color: #cbd5e1; font-size: 13.5px; margin-top: 8px;">
+        يسعدنا ويشرفنا استقبال أسئلة وملاحظات أستاذ المقرر وأعضاء لجنة المناقشة الموقرة 🎓
       </div>
     </div>
 
@@ -1043,6 +1224,7 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
     const totalSlides = slides.length;
     const counter = document.getElementById('slideCounter');
     const progressBar = document.getElementById('progressBar');
+    const slideSelect = document.getElementById('slideSelect');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
@@ -1057,6 +1239,7 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
       // Update counter and progress
       counter.innerText = (currentSlide + 1) + ' / ' + totalSlides;
       progressBar.style.width = (((currentSlide + 1) / totalSlides) * 100) + '%';
+      slideSelect.value = currentSlide;
 
       // Update button states
       prevBtn.disabled = (currentSlide === 0);
@@ -1073,6 +1256,10 @@ self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
       if (currentSlide > 0) {
         showSlide(currentSlide - 1);
       }
+    }
+
+    function jumpToSlide(val) {
+      showSlide(parseInt(val));
     }
 
     function toggleFullscreen() {
