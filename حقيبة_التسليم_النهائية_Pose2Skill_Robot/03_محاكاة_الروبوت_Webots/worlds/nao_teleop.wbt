@@ -1,0 +1,47 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/softbank/nao/protos/Nao.proto"
+
+WorldInfo {
+  info [
+    "Pose2Skill-Robot: Full-Body NAO Humanoid Teleoperation World",
+    "Real-time Computer Vision Teleoperation via MediaPipe Pose",
+    "Features: Active Anti-Fall Virtual Harness & Dynamic Leg Articulation"
+  ]
+  title "Pose2Skill-Robot: NAO Humanoid Teleoperation"
+  basicTimeStep 20
+  FPS 30
+  contactProperties [
+    ContactProperties {
+      material1 "NAO foot material"
+      coulombFriction [
+        7
+      ]
+      bounce 0.3
+      bounceVelocity 0.003
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.11 0.05 -0.99 2.32
+  position 1.25 1.35 0.72
+  follow "NAO"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  rotation 0 0 1 1.57079632679
+  size 25 25
+  tileSize 0.8 0.8
+}
+Nao {
+  rotation 0 0 1 1.57079632679
+  controller "nao_teleop"
+  supervisor TRUE
+  synchronization FALSE
+}
