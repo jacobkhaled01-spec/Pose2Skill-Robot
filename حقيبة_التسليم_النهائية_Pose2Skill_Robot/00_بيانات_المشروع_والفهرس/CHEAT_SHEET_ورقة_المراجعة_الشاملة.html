@@ -2,27 +2,34 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>ورقة المراجعة الشاملة - Pose2Skill-Robot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدليل الفني والهندسي الشامل - Pose2Skill-Robot Cheat Sheet</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;600&display=swap');
 
   @page {
     size: A4;
-    margin: 1.5cm;
+    margin: 1.2cm;
+    @bottom-center {
+      content: "صفحة " counter(page);
+      font-size: 8pt;
+      font-family: 'Cairo', sans-serif;
+      color: #64748b;
+    }
   }
 
   body {
     font-family: 'Cairo', sans-serif;
-    font-size: 10pt;
+    font-size: 9.5pt;
     line-height: 1.55;
     color: #0f172a;
     background: #f8fafc;
     margin: 0;
-    padding: 25px;
+    padding: 20px;
   }
 
   .container {
-    max-width: 950px;
+    max-width: 1000px;
     margin: 0 auto;
     background: #ffffff;
     border: 1px solid #cbd5e1;
@@ -34,61 +41,124 @@
   .header-card {
     border-bottom: 2.5px solid #1e3a8a;
     padding-bottom: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
   }
   .main-title {
-    font-size: 17pt;
-    font-weight: 800;
+    font-size: 16pt;
+    font-weight: 900;
     color: #1e3a8a;
-    margin: 0 0 6px 0;
+    margin: 0 0 5px 0;
   }
   .sub-title {
-    font-size: 11pt;
+    font-size: 10.5pt;
     font-weight: 600;
     color: #475569;
     margin: 0;
   }
 
+  .print-btn {
+    background: #1e3a8a;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    font-size: 9pt;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+  }
+  .print-btn:hover {
+    background: #1e40af;
+  }
+
   .meta-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
     background: #f1f5f9;
     border-radius: 6px;
     padding: 12px 16px;
     margin-bottom: 25px;
-    font-size: 9.5pt;
+    font-size: 9pt;
+    border: 1px solid #e2e8f0;
   }
   .meta-item strong {
     color: #0f172a;
   }
 
+  .toc-box {
+    background: #fdfdfe;
+    border: 1px solid #cbd5e1;
+    border-right: 4px solid #1e3a8a;
+    border-radius: 6px;
+    padding: 12px 20px;
+    margin-bottom: 25px;
+  }
+  .toc-title {
+    font-weight: 800;
+    font-size: 10.5pt;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+  }
+  .toc-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    margin: 0;
+    padding-right: 18px;
+    font-size: 8.8pt;
+  }
+  .toc-list a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+  .toc-list a:hover {
+    text-decoration: underline;
+  }
+
   h2.sec-title {
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: 800;
     color: #0f172a;
     border-right: 4px solid #1e3a8a;
     padding-right: 10px;
-    margin-top: 24px;
+    margin-top: 26px;
     margin-bottom: 12px;
+    background: #f8fafc;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    break-after: avoid;
+  }
+  h3.subsec-title {
+    font-size: 10.2pt;
+    font-weight: 700;
+    color: #1e40af;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    break-after: avoid;
   }
 
   table.styled-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 9pt;
+    margin: 10px 0 16px 0;
+    font-size: 8.8pt;
+    break-inside: avoid;
   }
   table.styled-table th {
     background: #1e3a8a;
     color: #ffffff;
     font-weight: 700;
     text-align: right;
-    padding: 8px 10px;
+    padding: 7px 9px;
     border: 1px solid #1e3a8a;
   }
   table.styled-table td {
-    padding: 7px 10px;
+    padding: 6px 9px;
     border: 1px solid #e2e8f0;
   }
   table.styled-table tr:nth-child(even) {
@@ -100,10 +170,10 @@
     border: 1px solid #cbd5e1;
     border-right: 3px solid #2563eb;
     border-radius: 4px;
-    padding: 10px 16px;
-    margin: 10px 0;
+    padding: 9px 14px;
+    margin: 8px 0;
     font-family: 'Times New Roman', serif;
-    font-size: 11pt;
+    font-size: 10.5pt;
     direction: ltr;
     text-align: center;
   }
@@ -112,193 +182,436 @@
     background: #fdfefe;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    break-inside: avoid;
   }
   .qa-question {
     font-weight: 700;
     color: #1e3a8a;
-    margin-bottom: 5px;
-    font-size: 10pt;
+    margin-bottom: 4px;
+    font-size: 9.5pt;
   }
   .qa-answer {
-    font-size: 9.5pt;
+    font-size: 9pt;
     color: #334155;
-    line-height: 1.55;
+    line-height: 1.5;
   }
 
   code {
     font-family: 'Fira Code', monospace;
     background: #f1f5f9;
-    padding: 2px 5px;
+    padding: 1px 4px;
     border-radius: 3px;
-    font-size: 8.5pt;
+    font-size: 8.2pt;
     color: #b91c1c;
+    direction: ltr;
+    display: inline-block;
+  }
+  pre {
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: 'Fira Code', monospace;
+    font-size: 8.2pt;
+    direction: ltr;
+    text-align: left;
+    overflow-x: auto;
+    margin: 8px 0;
   }
 
-  .print-btn {
-    display: inline-block;
-    background: #1e3a8a;
-    color: #ffffff;
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 9pt;
-    cursor: pointer;
-    margin-bottom: 15px;
+  .pipeline-flow {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 12px;
+    font-family: 'Fira Code', monospace;
+    font-size: 8pt;
+    direction: ltr;
+    text-align: left;
+    line-height: 1.4;
+    white-space: pre;
+    overflow-x: auto;
   }
+
   @media print {
     .print-btn { display: none; }
     body { background: #fff; padding: 0; }
-    .container { border: none; box-shadow: none; padding: 0; }
+    .container { border: none; box-shadow: none; padding: 0; width: 100%; max-width: 100%; }
   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <button class="print-btn" onclick="window.print()">🖨️ طباعة الورقة المرجعية (Print / Save PDF)</button>
-
   <div class="header-card">
-    <h1 class="main-title">Pose2Skill-Robot: ورقة المراجعة الشاملة (Cheat Sheet)</h1>
-    <div class="sub-title">الدليل الفني والهندسي السريع لمناقشة مشروع مقرر معالجة الصور (عملي)</div>
+    <div>
+      <h1 class="main-title">Pose2Skill-Robot: الدليل الفني والهندسي الشامل (Master Cheat Sheet)</h1>
+      <div class="sub-title">مرجع تفصيلي لكافة الخوارزميات والمعادلات الرياضية ومعمارية الكود والمناقشة الأكاديمية</div>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ طباعة الدليل (Print / PDF)</button>
   </div>
 
   <div class="meta-grid">
-    <div class="meta-item"><strong>الجامعة:</strong> جامعة إب — كلية الحاسبات</div>
+    <div class="meta-item"><strong>الجامعة:</strong> جامعة إب &bull; كلية الحاسبات</div>
+    <div class="meta-item"><strong>القسم:</strong> علوم الحاسوب وتقنية المعلومات</div>
     <div class="meta-item"><strong>المقرر:</strong> معالجة صور عملي (المستوى 4)</div>
-    <div class="meta-item"><strong>إشراف:</strong> م. مالك المصنف</div>
-    <div class="meta-item"><strong>الطلاب:</strong> يعقوب المهاجري، سليمان العربي، مالك جبران</div>
-    <div class="meta-item" style="grid-column: span 2;"><strong>GitHub:</strong> <a href="https://github.com/jacobkhaled01-spec/Pose2Skill-Robot" target="_blank">jacobkhaled01-spec/Pose2Skill-Robot</a></div>
+    <div class="meta-item"><strong>أستاذ المقرر:</strong> م. مالك المصنف</div>
+    <div class="meta-item"><strong>فريق العمل:</strong> يعقوب المهاجري، سليمان العربي، مالك جبران</div>
+    <div class="meta-item"><strong>المستودع:</strong> <a href="https://github.com/jacobkhaled01-spec/Pose2Skill-Robot" target="_blank">jacobkhaled01-spec/Pose2Skill-Robot</a></div>
   </div>
 
-  <h2 class="sec-title">1. معمارية خط أنابيب المعالجة (Pipeline Architecture)</h2>
+  <div class="toc-box">
+    <div class="toc-title">📌 محتويات الدليل المرجعي:</div>
+    <div class="toc-list">
+      <div><a href="#sec-pipeline">1. مخطط خط أنابيب المعالجة (Pipeline)</a></div>
+      <div><a href="#sec-mediapipe">2. دليل نقاط MediaPipe الـ 33 بالتفصيل</a></div>
+      <div><a href="#sec-kinematics">3. الاشتقاق الرياضي للمفاصل الـ 20</a></div>
+      <div><a href="#sec-vision">4. خوارزميات معالجة الصور وضبط الكاميرا</a></div>
+      <div><a href="#sec-ema">5. مرشح التنعيم الرقمي (EMA Filter)</a></div>
+      <div><a href="#sec-lfd">6. محرك تعلّم المهارات (LfD & LERP)</a></div>
+      <div><a href="#sec-ipc">7. بروتوكول التراسل المحلي (TCP IPC)</a></div>
+      <div><a href="#sec-webots">8. محاكاة Webots وحزام التوازن المشرف</a></div>
+      <div><a href="#sec-joints">9. جدول مفاصل الروبوت NAO وحدودها</a></div>
+      <div><a href="#sec-gui">10. دليل أزرار الواجهة واختصارات الكيبورد</a></div>
+      <div><a href="#sec-bench">11. قياسات الأداء وزمن المعالجة</a></div>
+      <div><a href="#sec-viva">12. بنك أسئلة المناقشة والدفاع (10 أسئلة)</a></div>
+    </div>
+  </div>
+
+  <!-- 1. PIPELINE ARCHITECTURE -->
+  <h2 class="sec-title" id="sec-pipeline">1. مخطط خط أنابيب المعالجة (Pipeline Architecture)</h2>
+  <div class="pipeline-flow">[كاميرا الويب (640x480)]
+       ↓ (cv2.VideoCapture عبر DirectShow مع ترميز MJPG لثبات 30 FPS)
+[معالجة الإطار (cv2.flip(frame, 1) + cv2.cvtColor(BGR2RGB))]
+       ↓
+[نموذج MediaPipe Pose]
+       ↓ (استخراج 33 نقطة ثلاثية الأبعاد: X, Y, Z, Visibility)
+[محرك الحسابات الكينماتيكية (Kinematics Calculator)]
+       ↓ (اشتقاق زوايا الرأس، الذراعين، الورك، الركبتين، والكاحلين عبر Dot-Product & Trigonometry)
+[مرشح التنعيم الرقمي (EMA Filter)]
+       ↓ (تصفية الاهتزاز والضجيج: alpha=0.35 في التوجيه الحي)
+[محرك تعلّم المهارات (LfD Engine)] ────(إذا كان التسجيل مفعل)───→ [حفظ مسار JSON في /skills]
+       ↓                                                           ↑
+       ├──────(إذا كان التشغيل مفعل)───← [مشغل LERP الزمني] ───────┘
+       ↓ (حزمة JSON عبر TCP Socket Port: 10006 بزمن 1.1 ms)
+[متحكم الروبوت المشرف في Webots (nao_teleop.py)]
+       ↓ (تطبيق حزام التوازن Supervisor Anti-Fall: torso.setVelocity([0,0,0,0,0,0]))
+[محركات روبوت SoftBank NAO (20 محرك مفصلي)]</div>
+
+  <!-- 2. MEDIAPIPE 33 LANDMARKS -->
+  <h2 class="sec-title" id="sec-mediapipe">2. دليل نقاط هيكل الجسم الـ 33 في MediaPipe Pose بالتفصيل</h2>
   <table class="styled-table">
     <thead>
       <tr>
-        <th>المرحلة</th>
-        <th>التقنية والأداة</th>
-        <th>المهمة والوظيفة الهندسية</th>
+        <th style="width: 8%;">الرقم</th>
+        <th style="width: 28%;">الاسم الإنجليزي</th>
+        <th style="width: 25%;">الاسم بالعربية</th>
+        <th>الاستخدام الوظيفي في كود المشروع</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>0</td><td><code>NOSE</code></td><td>الأنف</td><td>حساب دوران وإمالة الرأس (Head Yaw & Pitch).</td></tr>
+      <tr><td>1 - 6</td><td><code>EYES (Inner/Pupil/Outer)</code></td><td>نقاط العيون</td><td>تقدير استقامة الوجه للمستخدم.</td></tr>
+      <tr><td>7 - 8</td><td><code>LEFT_EAR, RIGHT_EAR</code></td><td>الأذنان</td><td>المحور العرضي للرأس وضبط الإمالة.</td></tr>
+      <tr><td>9 - 10</td><td><code>MOUTH (Left / Right)</code></td><td>زوايا الفم</td><td>-</td></tr>
+      <tr><td>11</td><td><code>LEFT_SHOULDER</code></td><td>الكتف الأيسر</td><td>مفصل الكتف الأيسر (Pitch & Roll) وحساب خط الصدر.</td></tr>
+      <tr><td>12</td><td><code>RIGHT_SHOULDER</code></td><td>الكتف الأيمن</td><td>مفصل الكتف الأيمن (Pitch & Roll) وحساب خط الصدر.</td></tr>
+      <tr><td>13</td><td><code>LEFT_ELBOW</code></td><td>الكوع الأيسر</td><td>مفصل ثني ودوران الكوع الأيسر (LElbowRoll & Yaw).</td></tr>
+      <tr><td>14</td><td><code>RIGHT_ELBOW</code></td><td>الكوع الأيمن</td><td>مفصل ثني ودوران الكوع الأيمن (RElbowRoll & Yaw).</td></tr>
+      <tr><td>15</td><td><code>LEFT_WRIST</code></td><td>المعصم الأيسر</td><td>متجه الساعد الأيسر وإغلاق زاوية الذراع.</td></tr>
+      <tr><td>16</td><td><code>RIGHT_WRIST</code></td><td>المعصم الأيمن</td><td>متجه الساعد الأيمن وإغلاق زاوية الذراع.</td></tr>
+      <tr><td>17 - 22</td><td><code>HANDS (Pinky/Index/Thumb)</code></td><td>أطراف الكفين</td><td>إشارات حركة الكف الإجمالية.</td></tr>
+      <tr><td>23</td><td><code>LEFT_HIP</code></td><td>الورك الأيسر</td><td>مفصل الحوض وثني الفخذ الأيسر (LHipPitch).</td></tr>
+      <tr><td>24</td><td><code>RIGHT_HIP</code></td><td>الورك الأيمن</td><td>مفصل الحوض وثني الفخذ الأيمن (RHipPitch).</td></tr>
+      <tr><td>25</td><td><code>LEFT_KNEE</code></td><td>الركبة اليسرى</td><td>زاوية ثني الركبة اليسرى (LKneePitch) للركل والقرفصاء.</td></tr>
+      <tr><td>26</td><td><code>RIGHT_KNEE</code></td><td>الركبة اليمنى</td><td>زاوية ثني الركبة اليمنى (RKneePitch) للركل والقرفصاء.</td></tr>
+      <tr><td>27</td><td><code>LEFT_ANKLE</code></td><td>الكاحل الأيسر</td><td>حساب فرق الارتفاع لكشف الركل وزاوية مشط القدم.</td></tr>
+      <tr><td>28</td><td><code>RIGHT_ANKLE</code></td><td>الكاحل الأيمن</td><td>حساب فرق الارتفاع لكشف الركل وزاوية مشط القدم.</td></tr>
+      <tr><td>29 - 30</td><td><code>LEFT_HEEL, RIGHT_HEEL</code></td><td>كعب القدمين</td><td>استقرار القدم وموازنة باطن القدم.</td></tr>
+      <tr><td>31 - 32</td><td><code>FOOT_INDEX (Left / Right)</code></td><td>مشط / أصابع القدمين</td><td>زاوية مشط القدم (AnklePitch) لمنع الانقلاب.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 3. DETAILED KINEMATICS -->
+  <h2 class="sec-title" id="sec-kinematics">3. الاشتقاق الرياضي المفصل للمفاصل الـ 20 (Kinematics Derivation)</h2>
+
+  <h3 class="subsec-title">أ. دالة الزوايا الفراغية العامة <code>calculate_angle_3d(a, b, c)</code></h3>
+  <div class="formula-card">
+    u = pA - pB, &emsp; v = pC - pB <br>
+    &theta; = arccos( (u &bull; v) / ( ||u|| ||v|| + 10^-6 ) ) &times; (180 / &pi;)
+  </div>
+
+  <h3 class="subsec-title">ب. مفاصل الرأس والذراعين</h3>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>المفصل</th>
+        <th>المعادلة الرياضية في الكود</th>
+        <th>مدى التقييد (Clamping)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>1. التقاط الفيديو</td>
-        <td>OpenCV (DirectShow, MJPG)</td>
-        <td>التقاط تيار الكاميرا بدقة 640x480 وبسرعة 30 FPS مستقرة دون تأخير نوافذ ويندوز.</td>
+        <td><strong>HeadYaw</strong></td>
+        <td><code>clip((nose.x - shoulder_mid_x) * 2.8, -1.8, 1.8)</code></td>
+        <td>[-1.8 rad, +1.8 rad]</td>
       </tr>
       <tr>
-        <td>2. استخراج الوضعية</td>
-        <td>MediaPipe Pose</td>
-        <td>استخراج 33 نقطة ثلاثية الأبعاد (X, Y, Z) تمثل الهيكل العظمي للجسم البشري.</td>
+        <td><strong>HeadPitch</strong></td>
+        <td><code>clip((nose.y - (shoulder_mid_y - 0.16)) * 2.5, -0.6, 0.5)</code></td>
+        <td>[-0.6 rad, +0.5 rad]</td>
       </tr>
       <tr>
-        <td>3. الحسابات الكينماتيكية</td>
-        <td>Vector Dot Product & Arccos</td>
-        <td>حساب زوايا انحناء المفاصل للأطراف العلوية والسفلية ومطابقتها مع مفاصل الروبوت NAO.</td>
+        <td><strong>RShoulderPitch</strong></td>
+        <td><code>asin(clip(u_y / len, -1.0, 1.0))</code> حيث u = Elbow - Shoulder</td>
+        <td>[-2.0 rad, +2.0 rad]</td>
       </tr>
       <tr>
-        <td>4. تصفية التنعيم</td>
-        <td>EMA Filter (&alpha; = 0.35)</td>
-        <td>تصفية ارتعاش الكاميرا والضجيج اللحظي لتحقيق حركة ناعمة ومستقرة للمحركات.</td>
+        <td><strong>RShoulderRoll</strong></td>
+        <td><code>-max(0.0, u_x / len) * 1.30 - 0.05</code> (إبعاد الذراع جانبياً)</td>
+        <td>[-1.32 rad, +0.1 rad]</td>
       </tr>
       <tr>
-        <td>5. محرك المهارات (LfD)</td>
-        <td>JSON Trajectories + LERP</td>
-        <td>تسجيل مسارات المهارات في ملفات JSON وتشغيلها ذاتياً بدقة زمنية متطابقة 1:1.</td>
+        <td><strong>RElbowRoll</strong></td>
+        <td><code>radians(max(0.0, 180.0 - calculate_angle_3d(Sh, El, Wr)))</code></td>
+        <td>[+0.04 rad, +1.50 rad]</td>
       </tr>
       <tr>
-        <td>6. التراسل الشبكي</td>
-        <td>TCP Socket (Port 10006)</td>
-        <td>إرسال حزم البيانات الخفيفة بزمن تأخير 1.1 مللي ثانية فقط للمحاكاة.</td>
+        <td><strong>RElbowYaw</strong></td>
+        <td><code>clip(-0.5 * r_elbow_bend, -1.5, 0.0)</code></td>
+        <td>[-1.5 rad, 0.0 rad]</td>
       </tr>
       <tr>
-        <td>7. محاكاة الروبوت</td>
-        <td>Webots + NAO Robot</td>
-        <td>تحريك 20 مفصلاً حركياً للروبوت مع تفعيل حزام التوازن المشرف (Supervisor Harness).</td>
+        <td><strong>LShoulderPitch</strong></td>
+        <td><code>asin(clip(u_y / len, -1.0, 1.0))</code></td>
+        <td>[-2.0 rad, +2.0 rad]</td>
+      </tr>
+      <tr>
+        <td><strong>LShoulderRoll</strong></td>
+        <td><code>max(0.0, -u_x / len) * 1.30 + 0.05</code></td>
+        <td>[-0.1 rad, +1.32 rad]</td>
+      </tr>
+      <tr>
+        <td><strong>LElbowRoll</strong></td>
+        <td><code>clip(-l_elbow_bend, -1.50, -0.04)</code></td>
+        <td>[-1.50 rad, -0.04 rad]</td>
+      </tr>
+      <tr>
+        <td><strong>LElbowYaw</strong></td>
+        <td><code>clip(0.5 * l_elbow_bend, 0.0, 1.5)</code></td>
+        <td>[0.0 rad, +1.5 rad]</td>
       </tr>
     </tbody>
   </table>
 
-  <h2 class="sec-title">2. المعادلات والأساس الرياضي (Formulas)</h2>
-  <div class="formula-card">
-    <strong>Joint Angle:</strong> &theta; = arccos( (u &bull; v) / ( ||u|| ||v|| + 10^-7 ) ) &emsp;|&emsp; u = pA - pB, v = pC - pB
-  </div>
-  <div class="formula-card">
-    <strong>EMA Smoothing:</strong> q&#770;(t) = &alpha; &bull; q(t) + (1 - &alpha;) &bull; q&#770;(t - &Delta;t) &emsp;|&emsp; (&alpha;=0.35 in Teleop, &alpha;=1.0 in Replay)
-  </div>
-  <div class="formula-card">
-    <strong>Timestamp LERP:</strong> q(&tau;) = (1 - &beta;) q(tk) + &beta; q(tk+1) &emsp;|&emsp; &beta; = (&tau; - tk) / (tk+1 - tk)
+  <h3 class="subsec-title">ج. كينماتيكا الأرجل والركل والقرفصاء</h3>
+  <div class="formula-card" style="text-align: right; direction: rtl;">
+    <strong>فحص كشف الركل:</strong> &Delta;<sub>ank</sub> = L_ank<sub>y</sub> - R_ank<sub>y</sub><br>
+    &bull; <strong>إذا كان &Delta;<sub>ank</sub> > 0.06:</strong> ركل بالقدم اليمنى &larr; <code>r_knee_p = clip(bend_k * 1.1, 0.4, 1.6)</code>، <code>r_hip_p = -r_knee_p * 0.75</code>، والقدم اليسرى مثبتة كقاعدة ارتكاز.<br>
+    &bull; <strong>إذا كان &Delta;<sub>ank</sub> < -0.06:</strong> ركل بالقدم اليسرى &larr; <code>l_knee_p = clip(bend_k * 1.1, 0.4, 1.6)</code>، <code>l_hip_p = -l_knee_p * 0.75</code>، والقدم اليمنى مثبتة.<br>
+    &bull; <strong>وضعية التوازن الثنائي / القرفصاء:</strong> <code>knee_p = clip(bend_k * 0.95, 0.0, 1.30)</code>، <code>hip_p = -knee_p * 0.52</code>، <code>ankle_p = -knee_p * 0.48</code> لموازنة باطن القدم مع سطح الأرض.
   </div>
 
-  <h2 class="sec-title">3. أزرار التحكم والاختصارات (Controls)</h2>
+  <!-- 4. COMPUTER VISION -->
+  <h2 class="sec-title" id="sec-vision">4. خوارزميات معالجة الصور وضبط الكاميرا</h2>
+  <div class="qa-block">
+    <div class="qa-question">حل مشكلة تأخير وانهيار كاميرا ويندوز (MSMF vs DirectShow):</div>
+    <div class="qa-answer">
+      تم تعطيل تحويلات الوسائط الصلبة في ويندوز وتفعيل واجهة <code>DirectShow</code> مع ترميز <code>MJPG</code> لخفض زمن التقاط الإطار من 200 ms إلى <strong>4.2 ms فقط</strong>:
+      <pre>os.environ["OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS"] = "0"
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)</pre>
+    </div>
+  </div>
+
+  <!-- 5. EMA FILTER -->
+  <h2 class="sec-title" id="sec-ema">5. مرشح التنعيم الأسي الرقمي (EMA Filter)</h2>
+  <div class="formula-card">
+    q&#770;(t) = &alpha; &bull; q(t) + (1 - &alpha;) &bull; q&#770;(t - &Delta;t)
+  </div>
+  <p>
+    &bull; <strong>التوجيه الحي (Teleop):</strong> نعتمد <code>&alpha; = 0.35</code> (مرشح تمرير منخفض يزيل ارتعاش الكاميرا وضجيج الحساس دون تأخير زمني ملموس).<br>
+    &bull; <strong>تشغيل المهارات (Replay):</strong> نعتمد <code>&alpha; = 1.0</code> (إلغاء التنعيم لأن المسار مسجل ومصفى، مما يمنح المحركات عزم الوصول الكامل لأقصى الزوايا المسجلة).
+  </p>
+
+  <!-- 6. LFD ENGINE -->
+  <h2 class="sec-title" id="sec-lfd">6. محرك تعلّم المهارات (LfD Engine) ومشغل LERP</h2>
+  <p>
+    يتم تسجيل متتالية الزوايا مع طابع زمني حقيقي بالثواني t. عند إعادة التشغيل، يقوم مشغل <code>Timestamp LERP</code> بالاستيفاء الخطي بناءً على الزمن المنقضي الفعلي &tau;:
+  </p>
+  <div class="formula-card">
+    &beta; = clip( (&tau; - tk) / (tk+1 - tk), 0.0, 1.0 ) <br>
+    q(&tau;) = q(tk) + &beta; &bull; ( q(tk+1) - q(tk) )
+  </div>
+  <p>
+    <strong>الفائدة الهندسية:</strong> فصل سرعة تشغيل المهارة عن سرعة معالج الحاسوب أو تقلبات معدل الإطارات، وضمان مطابقة زمنية بنسبة <strong>1:1</strong> لسرعة حركة الإنسان الأصلية.
+  </p>
+
+  <!-- 7. TCP IPC -->
+  <h2 class="sec-title" id="sec-ipc">7. بروتوكول التراسل المحلي (TCP IPC Protocol)</h2>
   <table class="styled-table">
     <thead>
       <tr>
-        <th style="width: 15%;">الزر</th>
+        <th>المعيار</th>
+        <th>القيمة المعتمدة</th>
+        <th>التفاصيل الهندسية</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>البروتوكول</td><td>TCP Stream Socket</td><td>يضمن موثوقية استلام حزم الـ JSON كاملة بدون فقدان.</td></tr>
+      <tr><td>العنوان والمقبس</td><td>127.0.0.1:10006</td><td>اتصال محلي فائق السرعة بزمن تأخير 1.1 مللي ثانية فقط.</td></tr>
+      <tr><td>تأطير الحزم</td><td>JSON Delimited with <code>\n</code></td><td>كل حزمة تنتهي بـ <code>\n</code> لتفادي تداخل الحزم عند الاستقبال.</td></tr>
+      <tr><td>إعادة الاتصال</td><td>Non-Blocking Auto Reconnect</td><td>محاولة إعادة الاتصال كل ثانيتين تلقائياً عند انقطاع المحاكاة.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 8. WEBOTS & SUPERVISOR -->
+  <h2 class="sec-title" id="sec-webots">8. محاكاة Webots وخوارزمية حزام التوازن المشرف (Supervisor Anti-Fall)</h2>
+  <div class="qa-block">
+    <div class="qa-question">خوارزمية الحزام الافتراضي (Supervisor Virtual Harness):</div>
+    <div class="qa-answer">
+      ترقية المتحكم ليعمل بصلاحية <code>Supervisor</code>، وتثبيت السرعة الخطية والزاوية لجذع الروبوت برمجياً عند كل خطوة محاكاة:
+      <pre>self.self_node.setVelocity([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])</pre>
+      هذا الإجراء يمتص قوى الانقلاب الخارجي دون التأثير على عزم محركات المفاصل، مع آلية نهوض ذاتي فوري إذا انخفض الجذع دون 22 سم أو مال أكثر من 30 درجة:
+      <pre>if pos[2] < 0.22 or abs(rot[0]) > 0.5 or abs(rot[1]) > 0.5:
+    self.trans_field.setSFVec3f([0.0, 0.0, 0.334])
+    self.rot_field.setSFRotation([0.0, 0.0, 1.0, 1.570796])
+    self.self_node.resetPhysics()</pre>
+    </div>
+  </div>
+
+  <!-- 9. JOINTS LIMITS -->
+  <h2 class="sec-title" id="sec-joints">9. جدول مفاصل روبوت SoftBank NAO وحدود حركتها</h2>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>المفصل (Joint Name)</th>
+        <th>المدى بالراديان (Min, Max)</th>
+        <th>المدى بالدرجات التقريبية</th>
+        <th>الوظيفة الميكانيكية</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>HeadYaw / HeadPitch</code></td><td>[-2.08, +2.08] / [-0.67, +0.51]</td><td>[-119&deg;, +119&deg;] / [-38&deg;, +29&deg;]</td><td>التفات وإمالة الرأس</td></tr>
+      <tr><td><code>RShoulderPitch / LShoulderPitch</code></td><td>[-2.08, +2.08]</td><td>[-119&deg;, +119&deg;]</td><td>رفع وخفض الذراع للأمام والخلف</td></tr>
+      <tr><td><code>RShoulderRoll / LShoulderRoll</code></td><td>[-1.32, +0.31] / [-0.31, +1.32]</td><td>[-76&deg;, +18&deg;] / [-18&deg;, +76&deg;]</td><td>فتح الذراع جانبياً وإغلاقه</td></tr>
+      <tr><td><code>RElbowRoll / LElbowRoll</code></td><td>[+0.03, +1.54] / [-1.54, -0.03]</td><td>[+2&deg;, +88&deg;] / [-88&deg;, -2&deg;]</td><td>ثني ومد الكوع</td></tr>
+      <tr><td><code>RElbowYaw / LElbowYaw</code></td><td>[-2.08, +2.08]</td><td>[-119&deg;, +119&deg;]</td><td>دوران وتوجيه الساعد</td></tr>
+      <tr><td><code>RHipPitch / LHipPitch</code></td><td>[-1.53, +0.48]</td><td>[-88&deg;, +27&deg;]</td><td>ثني مفصل الحوض للأرجل</td></tr>
+      <tr><td><code>RKneePitch / LKneePitch</code></td><td>[-0.09, +2.11]</td><td>[-5&deg;, +121&deg;]</td><td>ثني الركبة للقرفصاء والركل</td></tr>
+      <tr><td><code>RAnklePitch / LAnklePitch</code></td><td>[-1.18, +0.92]</td><td>[-68&deg;, +53&deg;]</td><td>ثني مشط القدم لموازنة الأرضية</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 10. GUI CONTROLS -->
+  <h2 class="sec-title" id="sec-gui">10. دليل أزرار الواجهة التفاعلية واختصارات لوحة المفاتيح</h2>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th style="width: 15%;">الزر / الاختصار</th>
+        <th style="width: 25%;">الزر الرسومي على الشاشة</th>
         <th>الوظيفة والتحكم الميداني</th>
       </tr>
     </thead>
     <tbody>
+      <tr><td><code>T</code> أو <code>Space</code></td><td><code>[ ● TEACH ]</code></td><td>بدء / إيقاف تسجيل مهارة جديدة وحفظ مسارها في <code>skills/*.json</code>.</td></tr>
+      <tr><td><code>P</code></td><td><code>[ ▶ REPLAY ]</code></td><td>إعادة تشغيل آخر مهارة تم تسجيلها مع شريط تقدم نسبي.</td></tr>
+      <tr><td><code>1</code></td><td><code>[1] Martial Kick</code></td><td>تشغيل مهارة ركلة الفنون القتالية مع موازنة الجسم.</td></tr>
+      <tr><td><code>2</code></td><td><code>[2] Squat</code></td><td>تشغيل مهارة القرفصاء الرياضي المتزن وثني الركبتين.</td></tr>
+      <tr><td><code>3</code></td><td><code>[3] Salute</code></td><td>تشغيل مهارة تحية النصر ورفع الذراعين.</td></tr>
+      <tr><td><code>4</code></td><td><code>[4] Wave</code></td><td>تشغيل مهارة التلويح باليد للترحيب.</td></tr>
+      <tr><td><code>[</code> و <code>]</code></td><td><code>[ < ]</code> و <code>[ > ]</code></td><td>التنقل واختيار المهارة التالية / السابقة في المجلد.</td></tr>
+      <tr><td><code>S</code></td><td><code>[ 🦿 SQUAT ]</code></td><td>تبديل وضع القرفصاء اليدوي لاختبار توازن الروبوت.</td></tr>
+      <tr><td><code>Q</code></td><td><code>[ ✖ EXIT ]</code></td><td>خروج نظيف وإغلاق الكاميرا والمقبس الشبكي بأمان.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 11. BENCHMARKS -->
+  <h2 class="sec-title" id="sec-bench">11. قياسات الأداء وزمن المعالجة التفصيلي لكل مرحلة (Benchmarks)</h2>
+  <table class="styled-table">
+    <thead>
       <tr>
-        <td><code>T</code> أو <code>Space</code></td>
-        <td>بدء أو إيقاف تسجيل مهارة حركية جديدة وحفظها في مجلد <code>skills/</code> بصيغة JSON.</td>
+        <th>المرحلة البرمجية</th>
+        <th>زمن المعالجة (مللي ثانية)</th>
+        <th>النسبة المئوية</th>
+        <th>معدل التردد</th>
       </tr>
-      <tr>
-        <td><code>P</code></td>
-        <td>إعادة تشغيل آخر مهارة تم تسجيلها مباشرة على الروبوت في Webots.</td>
-      </tr>
-      <tr>
-        <td><code>1</code></td>
-        <td>تشغيل مهارة ركلة الفنون القتالية الجاهزة (Martial Arts Kick).</td>
-      </tr>
-      <tr>
-        <td><code>2</code></td>
-        <td>تشغيل مهارة القرفصاء الرياضي المتزن (Athletic Squat).</td>
-      </tr>
-      <tr>
-        <td><code>3</code></td>
-        <td>تشغيل مهارة تحية النصر بالذراعين (Double Arm Salute).</td>
-      </tr>
-      <tr>
-        <td><code>4</code></td>
-        <td>تشغيل مهارة التلويح باليد للترحيب (Wave Greeting).</td>
-      </tr>
-      <tr>
-        <td><code>Q</code></td>
-        <td>خروج نظيف وإغلاق الكاميرا والمقبس الشبكي بأمان.</td>
+    </thead>
+    <tbody>
+      <tr><td>التقاط الإطار (DirectShow MJPG)</td><td>4.2 &plusmn; 0.8 ms</td><td>18.6%</td><td>30 FPS</td></tr>
+      <tr><td>استخراج معالم MediaPipe Pose</td><td>16.5 &plusmn; 1.4 ms</td><td>73.3%</td><td>30 FPS</td></tr>
+      <tr><td>الحسابات الكينماتيكية للزوايا</td><td>0.6 &plusmn; 0.1 ms</td><td>2.6%</td><td>30 FPS</td></tr>
+      <tr><td>مرشح التنعيم الأسي (EMA)</td><td>0.1 &plusmn; 0.05 ms</td><td>0.4%</td><td>30 FPS</td></tr>
+      <tr><td>الإرسال عبر مقبس TCP المحلي</td><td>1.1 &plusmn; 0.3 ms</td><td>4.8%</td><td>30 FPS</td></tr>
+      <tr style="font-weight: 800; background: #e2e8f0;">
+        <td>التأخير الكلي (End-to-End Latency)</td>
+        <td>22.5 ms</td>
+        <td>100%</td>
+        <td>30 FPS مستقر</td>
       </tr>
     </tbody>
   </table>
 
-  <h2 class="sec-title">4. أهم أسئلة الدفاع والمناقشة الفنية (Defense Q&A)</h2>
+  <!-- 12. VIVA Q&A -->
+  <h2 class="sec-title" id="sec-viva">12. بنك أسئلة المناقشة والدفاع الأكاديمي (Viva & Defense Q&A)</h2>
 
   <div class="qa-block">
-    <div class="qa-question">س1: لماذا يسقط الروبوت في المحاكاة عند رفع القدم للركل؟ وكيف حلتها هندسياً؟</div>
+    <div class="qa-question">س1: ما الفكرة الجوهرية للمشروع وما الذي يجعله مختلفاً عن مجرد تشغيل كاميرا على روبوت؟</div>
     <div class="qa-answer">
-      خروج مركز الثقل (Center of Mass) عن قاعدة الارتكاز الضيقة للقدم الواحدة يولّد عزم انقلاب فيزيائي يسقط الروبوت. قمنا بحل ذلك عبر ترقية متحكم Webots ليعمل بصلاحية <strong>المشرف (Supervisor)</strong> وبرمجة حزام توازن (Supervisor Harness) يثبت السرعة المتجهية الخطية والزاوية للجذع برمجياً: <code>torso.setVelocity([0, 0, 0, 0, 0, 0])</code> دون التأثير على عزم المحركات، فتحركت الأرجل بحرية كاملة مع استقرار تام.
+      المشروع يطبق مفهوم <strong>تعلّم الروبوت من العرض البشري (Learning from Demonstration - LfD)</strong>. لا يقتصر النظام على توجيه الروبوت لحظياً كمرآة، بل يقوم بالتقاط الحركات البشرية المعقدة وتجريدها كينماتيكياً وتخزينها في ملفات مهارات مستقلة بصيغة JSON، ثم استرجاعها وإعادة تنفيذها ذاتياً بدقة زمنية متطابقة (1:1) عبر الاستيفاء الخطي الزمني LERP، دون حاجة لوجود الإنسان أمام الكاميرا.
     </div>
   </div>
 
   <div class="qa-block">
-    <div class="qa-question">س2: ما الفرق بين التوجيه اللحظي (Teleoperation) وتعلّم المهارات (LfD)؟</div>
+    <div class="qa-question">س2: لماذا يسقط الروبوت في Webots عند رفع قدم واحدة، وما الحل البرمجي الذي طبقتموه؟</div>
     <div class="qa-answer">
-      التوجيه اللحظي هو مرآة حية لنقل حركات المستخدم للروبوت في نفس اللحظة عبر الكاميرا. أما تعلّم المهارات (LfD) فيقوم بالتقاط مسارات الحركة وتخزينها كملف مستقل (JSON) مع طوابعها الزمنية، ليتمكن الروبوت من استرجاع المهارة وتشغيلها ذاتياً دون وجود إنسان أمام الكاميرا.
+      خروج مركز الثقل (CoM) عن قاعدة ارتكاز القدم الواحدة يولد عزم انقلاب فيزيائي. قمنا بحل ذلك عبر ترقية متحكم Webots ليعمل بصلاحية <strong>المشرف (Supervisor)</strong> وبرمجة حزام توازن (Supervisor Harness) يثبت السرعة المتجهية الخطية والزاوية للجذع برمجياً: <code>torso.setVelocity([0, 0, 0, 0, 0, 0])</code> دون التأثير على عزم المحركات، فتحركت الأرجل بحرية كاملة مع استقرار تام.
     </div>
   </div>
 
   <div class="qa-block">
-    <div class="qa-question">س3: لماذا استخدمتم MediaPipe Pose ولم تستخدموا نموذج Hands للأصابع؟</div>
+    <div class="qa-question">س3: لماذا لم تستخدموا نموذج MediaPipe Hands لتتبع الأصابع؟</div>
     <div class="qa-answer">
-      نموذج Pose يستخرج 33 نقطة لكامل الجسم بتردد 30 إطار/ثانية باستهلاك معالج منخفض، بينما تشغيل نموذج Hands إضافي في كل إطار يخفض معدل الإطارات إلى ما دون 15 إطار/ثانية ويسبب تأخيراً غير مقبول على الحواسيب العادية.
+      نموذج Pose يستخرج 33 نقطة لكامل الجسم بتردد 30 إطار/ثانية باستهلاك معالج منخفض، بينما تشغيل نموذج Hands إضافي يتطلب تشغيل شبكتين عصبيتين إضافيتين مما يخفض التردد إلى ما دون 15 إطار/ثانية ويسبب تأخيراً غير مقبول على الحواسيب العادية.
     </div>
   </div>
 
   <div class="qa-block">
-    <div class="qa-question">س4: ما فائدة الاستيفاء الخطي الزمني (Timestamp LERP)؟</div>
+    <div class="qa-question">س4: ما أهمية مرشح EMA ولماذا جعلتم قيمة المعامل &alpha; متغيرة؟</div>
     <div class="qa-answer">
-      يضمن تطابق سرعة المهارة المنفذة مع سرعة تسجيل الإنسان بنسبة 1:1 بصرف النظر عن تفاوت سرعة الكاميرا أو بطء تكرار الحلقة البرمجية في الحاسوب.
+      إحداثيات الكاميرا تتعرض لضجيج لحظي وارتعاش ناتج عن الإضاءة. مرشح EMA يخمد هذا الضجيج. في التوجيه الحي، استخدمنا <code>&alpha; = 0.35</code> لتحقيق استقرار عالي دون تأخير زمني. أما أثناء تشغيل المهارات المسجلة، فاعتمدنا <code>&alpha; = 1.0</code> لأن المسار مصفى مسبقاً، ونريد من المحركات بلوغ كامل المدى الحركي المسجل بنسبة 100%.
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-question">س5: لماذا اعتمدتم الاستيفاء الزمني (Timestamp LERP) بدلاً من قراءة الإطارات تسلسلياً؟</div>
+    <div class="qa-answer">
+      لأن تشغيل الحركة بناءً على عداد الإطارات يربط سرعتها بسرعة معالج الحاسوب أو سقوط بعض الإطارات (Frame Drops)، بينما الاستيفاء بالطوابع الزمنية يضمن مطابقة واقعية بنسبة 1:1 لسرعة الحركة الأصلية للإنسان.
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-question">س6: لماذا اخترتم بروتوكول TCP للربط بين بايثون والمحاكاة وليس UDP؟</div>
+    <div class="qa-answer">
+      لأن التراسل يتم محلياً على نفس الجهاز (Localhost 127.0.0.1)، وزمن التأخير عبر TCP ضئيل للغاية (1.1 ms فقط). وبروتوكول TCP يضمن سلامة وصول حزم التهيئة وأوامر المهارات بصيغة JSON دون فقدان أي حزمة أو تشوه نصوص JSON.
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-question">س7: كيف يستدل النظام على حركة الركل بالقدم اليمنى أو اليسرى؟</div>
+    <div class="qa-answer">
+      عبر فحص الإحداثي الرأسي لكاحل القدمين (&Delta; = L_ank_y - R_ank_y). فإذا كان الفرق أكبر من 0.06 فهذا يعني ارتفاع القدم اليمنى للركل، فيقوم النظام بتركيز زاوية الركل على الركبة والورك الأيمن وتثبيت القدم اليسرى على الأرض لضمان توازن الروبوت.
+    </div>
+  </div>
+
+  <div class="qa-block">
+    <div class="qa-question">س8: ما هي القيود الفنية الحالية للمشروع وما هي مقترحات التطوير المستقبلي؟</div>
+    <div class="qa-answer">
+      القيود الحالية: (1) عدم تتبع عقل الأصابع الفردية نظراً للاعتماد على MediaPipe Pose العام، (2) مفاصل كف الروبوت NAO في المحاكاة هي سلاميات سلبية ذات احتكاك ضعيف مما يجعل التقاط وحمل المجسمات الصلبة يتطلب خوارزميات تخطيط قبضة متقدمة (Grasp Planning). التطوير المستقبلي يتضمن دمج شبكات التعلم العميق التوليدية (Diffusion Policy) لتعميم المهارات، ودمج مستشعرات رد الفعل اللمسي لإتقان حمل الأجسام.
     </div>
   </div>
 
