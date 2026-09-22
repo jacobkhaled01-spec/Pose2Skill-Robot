@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>جامعة إب - تقرير مشروع مقرر معالجة صور عملي</title>
+<title>جامعة إب - Pose2Skill-Robot: نظام ذكي لتعلّم ونقل المهارات البشرية إلى الروبوت باستخدام تقدير الوضعية والتفاعل مع الأجسام</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800&display=swap');
 
@@ -39,7 +39,7 @@
     border: 2px solid #0f172a;
     outline: 1px solid #94a3b8;
     outline-offset: -6px;
-    padding: 45px 40px;
+    padding: 40px 35px;
     text-align: center;
     page-break-after: always;
     background: #ffffff;
@@ -74,44 +74,38 @@
   }
 
   .cover-center-block {
-    margin: 40px 0;
+    margin: 30px 0;
   }
   .course-label {
     font-family: 'Cairo', sans-serif;
-    font-size: 12pt;
+    font-size: 11.5pt;
     font-weight: 600;
     color: #334155;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .cover-main-title {
     font-family: 'Cairo', sans-serif;
-    font-size: 22pt;
+    font-size: 18pt;
     font-weight: 800;
     color: #0f172a;
-    line-height: 1.35;
-    margin: 12px 0 8px 0;
-  }
-  .cover-subtitle {
-    font-family: 'Cairo', sans-serif;
-    font-size: 13pt;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-top: 6px;
+    line-height: 1.45;
+    margin: 10px 0 8px 0;
   }
   .cover-en-title {
     font-family: 'Times New Roman', serif;
-    font-size: 11pt;
+    font-size: 10.5pt;
     font-style: italic;
     color: #475569;
-    margin-top: 6px;
+    margin-top: 8px;
+    line-height: 1.35;
     direction: ltr;
   }
 
   .cover-h-line {
-    width: 70%;
+    width: 75%;
     height: 1.5px;
     background: #0f172a;
-    margin: 20px auto;
+    margin: 18px auto;
   }
 
   .cover-meta-grid {
@@ -120,7 +114,7 @@
     gap: 20px;
     text-align: right;
     font-family: 'Cairo', sans-serif;
-    margin-top: 30px;
+    margin-top: 25px;
     border-top: 1px solid #cbd5e1;
     border-bottom: 1px solid #cbd5e1;
     padding: 16px 10px;
@@ -290,7 +284,7 @@
 </head>
 <body>
 
-<!-- 1. صفحة الغلاف الرسمية الخالصة (بدون أي ملصقات أو أيقونات) -->
+<!-- 1. صفحة الغلاف الرسمية الخالصة -->
 <div class="cover-page">
   <div class="cover-univ-header">
     <div style="font-size: 11pt; color: #334155;">الجمهورية اليمنية &bull; وزارة التعليم العالي والبحث العلمي</div>
@@ -303,9 +297,8 @@
   <div class="cover-center-block">
     <div class="course-label">تقرير مشروع مقرر معالجة صور عملي</div>
     <div class="cover-h-line"></div>
-    <h1 class="cover-main-title">مشروع تعليم الآلة عبر نقاط الجسم</h1>
-    <div class="cover-subtitle">نظام تعلّم ونقل المهارات الحركية للروبوت البشري عبر تقدير الوضعية البصرية</div>
-    <div class="cover-en-title">Pose2Skill-Robot: Machine Learning from Body Keypoints</div>
+    <h1 class="cover-main-title">Pose2Skill-Robot: نظام ذكي لتعلّم ونقل المهارات البشرية إلى الروبوت باستخدام تقدير الوضعية والتفاعل مع الأجسام</h1>
+    <div class="cover-en-title">Pose2Skill-Robot: An Intelligent System for Learning and Transferring Human Skills to Robots Using Pose Estimation and Object Interaction</div>
     <div class="cover-h-line"></div>
   </div>
 
@@ -340,7 +333,7 @@
   <div class="abstract-box">
     <div class="abstract-title">ملخص التقرير (Abstract)</div>
     <div class="abstract-text">
-      يقدم هذا التقرير التوثيق الفني والأكاديمي لمشروع مقرر معالجة صور عملي بقسم علوم الحاسوب وتقنية المعلومات بكلية الحاسبات والعلوم التطبيقية --- جامعة إب. يهدف المشروع بعنوان <strong>«مشروع تعليم الآلة عبر نقاط الجسم»</strong> إلى تطبيق خوارزميات معالجة الصور الرقمية لتقدير وضعية الجسم البشري في الزمن الحقيقي وتوجيه روبوت بشري محاكى (SoftBank NAO) داخل بيئة Webots باستخدام كاميرا ويب أحادية دون الحاجة لأي حساسات ملبوسة. يعتمد النظام على استخراج 33 نقطة مفصلية للهيكل العظمي البشري عبر نموذج MediaPipe Pose، يتبعها اشتقاق الزوايا الكينماتيكية لمفاصل الأطراف العلوية والسفلية، مع تطبيق مرشح التنعيم الأسي (EMA) للحد من ارتعاش الصورة. كما يعالج المشروع إشكالية سقوط الروبوت الفيزيائية في بيئة المحاكاة عند رفع القدم للركل عبر حزام توازن برمجي مشرف (Supervisor Harness) يحافظ على استقرار الجذع مع ترك المفاصل حرة الحركة. ويتضمن النظام وحدة لتسجيل الحركات كمهارات مستقلة (JSON) وإعادة تشغيلها بدقة زمنية متطابقة عبر الاستيفاء الخطي (LERP).
+      يقدم هذا التقرير التوثيق الفني والأكاديمي لمشروع مقرر معالجة صور عملي بقسم علوم الحاسوب وتقنية المعلومات بكلية الحاسبات والعلوم التطبيقية --- جامعة إب، بعنوان: <strong>«Pose2Skill-Robot: نظام ذكي لتعلّم ونقل المهارات البشرية إلى الروبوت باستخدام تقدير الوضعية والتفاعل مع الأجسام»</strong>. يهدف المشروع إلى تطبيق خوارزميات معالجة الصور الرقمية لتقدير وضعية الجسم البشري في الزمن الحقيقي وتوجيه روبوت بشري محاكى (SoftBank NAO) داخل بيئة Webots باستخدام كاميرا ويب أحادية دون الحاجة لأي حساسات ملبوسة. يعتمد النظام على استخراج 33 نقطة مفصلية للهيكل العظمي البشري عبر نموذج MediaPipe Pose، يتبعها اشتقاق الزوايا الكينماتيكية لمفاصل الأطراف العلوية والسفلية، مع تطبيق مرشح التنعيم الأسي (EMA) للحد من ارتعاش الصورة. كما يعالج المشروع إشكالية سقوط الروبوت الفيزيائية في بيئة المحاكاة عند رفع القدم للركل عبر حزام توازن برمجي مشرف (Supervisor Harness) يحافظ على استقرار الجذع مع ترك المفاصل حرة الحركة. ويتضمن النظام وحدة لتسجيل الحركات كمهارات مستقلة (JSON) وإعادة تشغيلها بدقة زمنية متطابقة عبر الاستيفاء الخطي (LERP).
     </div>
   </div>
 
@@ -490,7 +483,7 @@
   </p>
   <ul style="margin: 4px 0 10px 0; padding-right: 20px;">
     <li><strong>حدود تتبع الأصابع:</strong> يعتمد النظام حصرياً على نموذج MediaPipe Pose (33 نقطة لكامل الجسم)، وهو مصمم لتتبع الهيكل العظمي العام ومفاصل الأطراف الكبرى، ولا يدعم تتبع عقل وأصابع اليد المفصلة. لتحقيق تتبع دقيق للأصابع، يتطلب ذلك دمج نموذج MediaPipe Hands التخصصي (21 نقطة لكل كف) وهو ما يستهلك زمناً إضافياً في المعالجة.</li>
-    <li><strong>التقاط وحمل الأشياء الفيزيائية:</strong> إن إمساك الروبوت NAO للأجسام الصلبة وحملها في المحاكاة يواجه ضعفاً في فيزياء احتكاك سلاميات الأصابع في Webots، مما يجعل الإمساك الفيزيائي الحقيقي غير مستقر ميكانيكياً بدون استخدام خوارزميات تخطيط إمساك مخصصة (Grasp Planning).</li>
+    <li><strong>التفاعل الفيزيائي وإمساك الأجسام:</strong> إن مفاصل كف الروبوت NAO في المحاكاة هي سلاميات سلبية ذات احتكاك ضعيف، والتقاط الأشياء الصلبة وحملها حركياً يتطلب تطبيق خوارزميات متقدمة لتخطيط القبضة (Grasp Planning) وردود فعل لمسية (Tactile Feedback)، وهو ما يُمثل التطلع المستقبلي لتطوير بيئة التفاعل مع الأجسام.</li>
   </ul>
 
   <h2 class="sec-heading">8. الخاتمة</h2>
